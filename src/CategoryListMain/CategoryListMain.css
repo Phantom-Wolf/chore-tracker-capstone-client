@@ -1,0 +1,17 @@
+.dashboard, .dashboardDate {
+    margin: 5px auto;
+    text-align: center;
+}
+
+.CategoryListMain_List {
+    list-style: none;
+}
+
+.CategorySection {
+    display: inline;
+}
+
+.subText {
+    font-size: 13px;
+    font-weight: normal;
+}

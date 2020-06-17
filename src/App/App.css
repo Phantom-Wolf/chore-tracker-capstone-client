@@ -1,0 +1,60 @@
+h1, h2 {
+    margin: 5px auto;
+    text-align: center;
+}
+
+.title {
+    margin: 50px auto 5px;
+    text-decoration: none;
+    color: darkgrey;
+    font-size: 50px;
+}
+
+.subTitle {
+    margin: 5px auto 35px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.signUpForm {
+    margin: 5px auto;
+    text-align: center;
+}
+
+.signUpForm label {
+    display: inline-block;
+    width: 140px;
+    margin: 2px 5px;
+    text-align: right;
+}
+
+.signUpForm input {
+    display: inline-block;
+    width: 180px;
+    border-radius: 2px;
+}
+
+.CategoryPageHeader {
+    margin: 5px auto;
+    text-align: center;
+}
+
+.CategoryPageDateTypes {
+    list-style: none;
+}
+
+.addTaskForm {
+    margin: 5px auto;
+    text-align: left;
+    width: 280px;
+}
+
+#taskName, #addTaskNotes, #categorySelect {
+    width: 280px;
+}
+
+.addTaskForm label {
+    display: block;
+    width: 280px;
+    margin: 5px auto;
+}
