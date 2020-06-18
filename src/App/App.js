@@ -131,6 +131,33 @@ export class App extends Component {
 		const dateTimeFormat3 = new Intl.DateTimeFormat("en-US", options1);
 		console.log(dateTimeFormat3.format(date1));
 
+		// lists for addTask form
+		let weekdayList = [
+			"Sunday",
+			"Monday",
+			"Tuesday",
+			"Wednesday",
+			"Thursday",
+			"Friday",
+			"Saturday",
+		];
+		let weeklyList = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"];
+		let monthlyList = [
+			"January",
+			"February",
+			"March",
+			"April",
+			"May",
+			"June",
+			"July",
+			"August",
+			"September",
+			"October",
+			"November",
+			"December",
+		];
+
+		// values for context provider
 		const value = {
 			tasks: this.state.tasks,
 			categories: this.state.categories,
@@ -196,27 +223,11 @@ export class App extends Component {
 									<CategoryListNav />
 								</nav>
 								<ul className="CategoryPageDateTypes">
-									<li>
-										<h3>Sunday</h3>
-									</li>
-									<li>
-										<h3>Monday</h3>
-									</li>
-									<li>
-										<h3>Tuesday</h3>
-									</li>
-									<li>
-										<h3>Wednesday</h3>
-									</li>
-									<li>
-										<h3>Thursday</h3>
-									</li>
-									<li>
-										<h3>Friday</h3>
-									</li>
-									<li>
-										<h3>Saturday</h3>
-									</li>
+									{weekdayList.map((weekday) => (
+										<li>
+											<h3>{weekday}</h3>
+										</li>
+									))}
 								</ul>
 							</section>
 							<section className="CategoryPage">
@@ -228,21 +239,11 @@ export class App extends Component {
 									<CategoryListNav />
 								</nav>
 								<ul className="CategoryPageDateTypes">
-									<li>
-										<h3>Week 1</h3>
-									</li>
-									<li>
-										<h3>Week 2</h3>
-									</li>
-									<li>
-										<h3>week 3</h3>
-									</li>
-									<li>
-										<h3>Week 4</h3>
-									</li>
-									<li>
-										<h3>Week 5</h3>
-									</li>
+									{weeklyList.map((week) => (
+										<li>
+											<h3>{week}</h3>
+										</li>
+									))}
 								</ul>
 							</section>
 							<section className="CategoryPage">
@@ -254,42 +255,11 @@ export class App extends Component {
 									<CategoryListNav />
 								</nav>
 								<ul className="CategoryPageDateTypes">
-									<li>
-										<h3>January</h3>
-									</li>
-									<li>
-										<h3>Febraury</h3>
-									</li>
-									<li>
-										<h3>March</h3>
-									</li>
-									<li>
-										<h3>April</h3>
-									</li>
-									<li>
-										<h3>May</h3>
-									</li>
-									<li>
-										<h3>June</h3>
-									</li>
-									<li>
-										<h3>July</h3>
-									</li>
-									<li>
-										<h3>August</h3>
-									</li>
-									<li>
-										<h3>September</h3>
-									</li>
-									<li>
-										<h3>October</h3>
-									</li>
-									<li>
-										<h3>November</h3>
-									</li>
-									<li>
-										<h3>December</h3>
-									</li>
+									{monthlyList.map((month) => (
+										<li>
+											<h3>{month}</h3>
+										</li>
+									))}
 								</ul>
 							</section>
 							<section className="addTask">
@@ -319,6 +289,53 @@ export class App extends Component {
 												</option>
 											))}
 										</select>
+									</div>
+									<div className="add_task_cat_section">
+										<ul className="add_task_cat_list">
+											{weekdayList.map((weekday) => (
+												<li>
+													<label>
+														<input
+															type="checkbox"
+															className="add_task_check"
+															id="add_task_checkbox_list"
+															value={weekday}
+														/>
+														{weekday}
+													</label>
+												</li>
+											))}
+										</ul>
+										<ul className="add_task_cat_list">
+											{weeklyList.map((week) => (
+												<li>
+													<label>
+														<input
+															type="checkbox"
+															className="add_task_check"
+															id="add_task_checkbox_list"
+															value={week}
+														/>
+														{week}
+													</label>
+												</li>
+											))}
+										</ul>
+										<ul className="add_task_cat_list">
+											{monthlyList.map((month) => (
+												<li>
+													<label>
+														<input
+															type="checkbox"
+															className="add_task_check"
+															id="add_task_checkbox_list"
+															value={month}
+														/>
+														{month}
+													</label>
+												</li>
+											))}
+										</ul>
 									</div>
 								</form>
 							</section>

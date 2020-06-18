@@ -40,9 +40,9 @@ This app is for two types of users: a visitor and a logged-in user
 - I want to to be able to se a dashboard that shows all the tasks that fit the date criteria (with date shown within dashboard)
 - so that I can easily track what needs to be done
 
-- As a user
-- I want to be able to click on Date Category tabs that will bring me to the Category Page of my choice
-- so that I can navigate to the Category Page's contents
+* As a user
+* I want to be able to click on Date Category tabs that will bring me to the Category Page of my choice
+* so that I can navigate to the Category Page's contents
 
 #### Category Page
 
@@ -50,9 +50,9 @@ This app is for two types of users: a visitor and a logged-in user
 - I want to be able to see all the tasks stored under the given category
 - so that I can see, edit or delete all my tasks within that field
 
-- As a user
-- I want to be able to click on a Task within the populated list
-- so that I can navigate to the specific task I want details on
+* As a user
+* I want to be able to click on a Task within the populated list
+* so that I can navigate to the specific task I want details on
 
 #### Task Page
 
@@ -60,17 +60,33 @@ This app is for two types of users: a visitor and a logged-in user
 - I want to be able to see the page of a specific Task that shows title, notes, and category type
 - so that I can see any detailed notes on the task relevent to its completion
 
-- As a user
-- I want to be able to be able to click buttons that allow me to edit the contents of the task or to delete the task
-- so that the task remains relevent to my needs
+* As a user
+* I want to be able to be able to click buttons that allow me to edit the contents of the task or to delete the task
+* so that the task remains relevent to my needs
 
 ### Wireframes
 
-Landing/Login Page
+<!-- Landing/Login Page
 :-------------------------:
-![Landing/Login Page](/github-images/wireframes/landing-page-wireframe.png)
+![Landing/Login Page](/github-images/wireframes/landing-page-wireframe.png) -->
+
 Landing/Register Page
-![Landing/Register Page](/github-images/wireframes/landing-page-wireframe.png)
+![Landing/Register Page](/github-images/wireframes/landing-page-signup.png)
+
+Dashboard
+![Home/Dashboard](/github-images/wireframes/home-page-dashboard.png)
+
+Category Page/Weekdays
+![Catogory Page/Weekdays](/github-images/wireframes/category-page-weekdays.png)
+
+Category Page/Weekly
+![Catogory Page/Weekly](/github-images/wireframes/category-page-weekly.png)
+
+Category Page/Monthly
+![Catogory Page/Monthly](/github-images/wireframes/category-page-monthly.png)
+
+Add Task Form
+![Add Task Form](/github-images/wireframes/add-task-form.png)
 
 ## Screenshots
 
@@ -120,13 +136,13 @@ The app's functionality includes:
   - user id
   - title (varchar)
   - notes (text)
-  - recurrence (daily, weakly, monthly, yearly)
-  - recurrence specifics (Monday, 1st of month, 2 and 4th week of the month, yearly on the 15 of Jan)
+  - recurrence (weekday, weekly, monthly)
+  - recurrence specifics (Monday, 2nd and 4th week of the month, January)
   - start date (date)
   - end date (date)
 
 - tasks (DATABASE table)
-  - taks id
+  - task id
   - event id
   - date of the task (date)
   - task_status (checked / un-checked)
