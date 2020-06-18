@@ -86,7 +86,7 @@ This app is for two types of users: a visitor and a logged-in user
 
 ![Catogory Page/Weekly](/github-images/wireframes/category-page-weekly.png)
 
-#### ategory Page/Monthly
+#### Category Page/Monthly
 
 ![Catogory Page/Monthly](/github-images/wireframes/category-page-monthly.png)
 
