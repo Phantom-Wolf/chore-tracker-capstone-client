@@ -70,22 +70,28 @@ This app is for two types of users: a visitor and a logged-in user
 :-------------------------:
 ![Landing/Login Page](/github-images/wireframes/landing-page-wireframe.png) -->
 
-Landing/Register Page
+#### Landing/Register Page
+
 ![Landing/Register Page](/github-images/wireframes/landing-page-signup.png)
 
-Dashboard
+#### Dashboard
+
 ![Home/Dashboard](/github-images/wireframes/home-page-dashboard.png)
 
-Category Page/Weekdays
+#### Category Page/Weekdays
+
 ![Catogory Page/Weekdays](/github-images/wireframes/category-page-weekdays.png)
 
-Category Page/Weekly
+#### Category Page/Weekly
+
 ![Catogory Page/Weekly](/github-images/wireframes/category-page-weekly.png)
 
-Category Page/Monthly
+#### ategory Page/Monthly
+
 ![Catogory Page/Monthly](/github-images/wireframes/category-page-monthly.png)
 
-Add Task Form
+#### Add Task Form
+
 ![Add Task Form](/github-images/wireframes/add-task-form.png)
 
 ## Screenshots
