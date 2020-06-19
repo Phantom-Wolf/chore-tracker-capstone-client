@@ -6,6 +6,8 @@ import CategoryListMain from "../CategoryListMain/CategoryListMain";
 import Tasks from "../PracticeEntries";
 import ChoreContext from "../ChoreContext";
 import Categories from "../STORE";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 Date.prototype.getWeekOfMonth = function (exact) {
 	let month = this.getMonth(),
@@ -36,6 +38,8 @@ export class App extends Component {
 			touched: false,
 			visible: "none",
 		},
+		startDate: new Date(),
+		endChecked: false,
 	};
 
 	componentDidMount() {
@@ -116,6 +120,27 @@ export class App extends Component {
 	addTask = (task) => {
 		this.setState({
 			tasks: [...this.state.tasks, task],
+		});
+	};
+
+	// add task - end date functions
+
+	validateEndDateNever = () => {
+		const cb = document.getElementById("end_date_never_checkbox");
+		if (cb.checked) {
+			this.setState({
+				endChecked: true,
+			});
+		} else {
+			this.setState({
+				endChecked: false,
+			});
+		}
+	};
+
+	handleChange = (date) => {
+		this.setState({
+			startDate: date,
 		});
 	};
 
@@ -274,6 +299,24 @@ export class App extends Component {
 									<div>
 										<label htmlFor="addTaskNotes">Notes</label>
 										<textarea name="content" id="addTaskNotes" rows="5" cols="33" />
+									</div>
+									<div>
+										<label htmlFor="datePicker">Pick End Date</label>
+										<DatePicker
+											selected={this.state.startDate}
+											onChange={this.handleChange}
+											id="datePicker"
+											disabled={this.state.endChecked}
+										/>
+										<label>
+											<input
+												type="checkbox"
+												className="end_date_never"
+												id="end_date_never_checkbox"
+												onChange={this.validateEndDateNever}
+											/>
+											Never
+										</label>
 									</div>
 									<div>
 										<label htmlFor="categorySelect">Select Routine</label>
