@@ -9,9 +9,14 @@ const ChoreContext = React.createContext({
 	month: null,
 	monthNumber: null,
 	year: null,
+	startDate: null,
+	endChecked: null,
 	deleteTask: () => {},
 	addTask: () => {},
 	editTask: () => {},
+	handleDateSelection: () => {},
+	validateEndDateNever: () => {},
+	updateOption: () => {},
 });
 
 export default ChoreContext;

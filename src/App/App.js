@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Route, Link } from "react-router-dom";
-import CategoryListNav from "../CategoryListNav/CategoryListNav";
+
 import CategoryListMain from "../CategoryListMain/CategoryListMain";
 import Tasks from "../PracticeEntries";
 import ChoreContext from "../ChoreContext";
-import Categories from "../STORE";
-import DatePicker from "react-datepicker";
+import Register from "../Register/Register";
+import Dashboard from "../Dashboard/Dashboard";
+import AddTask from "../AddTask/AddTask";
 import "react-datepicker/dist/react-datepicker.css";
 
 Date.prototype.getWeekOfMonth = function (exact) {
@@ -104,12 +105,12 @@ export class App extends Component {
 		});
 	}
 
-	updateOption(option) {
+	updateOption = (option) => {
 		// this.setState({ option: { id: option, touched: true } });
 		let Categories = this.state.categories;
 		let found = Categories.find((category) => category.id === parseInt(option));
 		console.log(found);
-	}
+	};
 
 	handleDeleteTask = (taskId) => {
 		this.setState({
@@ -123,7 +124,7 @@ export class App extends Component {
 		});
 	};
 
-	// add task - end date functions
+	// add task form - end date functions
 
 	validateEndDateNever = () => {
 		const cb = document.getElementById("end_date_never_checkbox");
@@ -138,7 +139,7 @@ export class App extends Component {
 		}
 	};
 
-	handleChange = (date) => {
+	handleDateSelection = (date) => {
 		this.setState({
 			startDate: date,
 		});
@@ -156,32 +157,6 @@ export class App extends Component {
 		const dateTimeFormat3 = new Intl.DateTimeFormat("en-US", options1);
 		console.log(dateTimeFormat3.format(date1));
 
-		// lists for addTask form
-		let weekdayList = [
-			"Sunday",
-			"Monday",
-			"Tuesday",
-			"Wednesday",
-			"Thursday",
-			"Friday",
-			"Saturday",
-		];
-		let weeklyList = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"];
-		let monthlyList = [
-			"January",
-			"February",
-			"March",
-			"April",
-			"May",
-			"June",
-			"July",
-			"August",
-			"September",
-			"October",
-			"November",
-			"December",
-		];
-
 		// values for context provider
 		const value = {
 			tasks: this.state.tasks,
@@ -192,198 +167,23 @@ export class App extends Component {
 			month: this.state.month,
 			monthNumber: this.state.monthNumber,
 			year: this.state.year,
+			startDate: this.state.startDate,
+			endChecked: this.state.endChecked,
 			deleteTask: this.handleDeleteTask,
 			addTask: this.addTask,
+			handleDateSelection: this.handleDateSelection,
+			validateEndDateNever: this.validateEndDateNever,
+			updateOption: this.updateOption,
 		};
+
 		console.log("state", this.state);
 		return (
 			<ChoreContext.Provider value={value}>
 				<div className="App">
-					<section className="loginForm">
-						<header>
-							<h1>Title</h1>
-						</header>
-						<h3 className="subTitle">NEVER FALL BEHIND AGAIN</h3>
-
-						<form className="signUpForm">
-							<div>
-								<label htmlFor="email">Email:</label>
-								<input type="email" className="signUpEmail" id="email" />
-							</div>
-							<div>
-								<label htmlFor="password">Password:</label>
-								<input type="text" className="signUpPassword" id="password" />
-							</div>
-							<div>
-								<label htmlFor="confirmPass">Confirm Password:</label>
-								<input type="text" className="signUpConfirmPass" id="confirmPass" />
-							</div>
-							<div>
-								<button type="submit" disabled>
-									Sign-Up
-								</button>
-								<button disabled>Login</button>
-							</div>
-						</form>
-					</section>
-					<section className="homePage">
-						<header>
-							<h1>
-								<Link to="/" className="title">
-									Title
-								</Link>
-							</h1>
-						</header>
-						<nav>
-							<CategoryListNav />
-						</nav>
-						<main>
-							<CategoryListMain />
-							<section className="CategoryPage">
-								<header className="CategoryPageHeader">
-									<h2>Weekdays</h2>
-									<p>It is currently {this.state.weekday}</p>
-								</header>
-								<nav>
-									<CategoryListNav />
-								</nav>
-								<ul className="CategoryPageDateTypes">
-									{weekdayList.map((weekday) => (
-										<li>
-											<h3>{weekday}</h3>
-										</li>
-									))}
-								</ul>
-							</section>
-							<section className="CategoryPage">
-								<header className="CategoryPageHeader">
-									<h2>Weeks</h2>
-									<p>It is currently Week {this.state.weekOfMonth} of the Month</p>
-								</header>
-								<nav>
-									<CategoryListNav />
-								</nav>
-								<ul className="CategoryPageDateTypes">
-									{weeklyList.map((week) => (
-										<li>
-											<h3>{week}</h3>
-										</li>
-									))}
-								</ul>
-							</section>
-							<section className="CategoryPage">
-								<header className="CategoryPageHeader">
-									<h2>Months</h2>
-									<p>It is currently {this.state.month}</p>
-								</header>
-								<nav>
-									<CategoryListNav />
-								</nav>
-								<ul className="CategoryPageDateTypes">
-									{monthlyList.map((month) => (
-										<li>
-											<h3>{month}</h3>
-										</li>
-									))}
-								</ul>
-							</section>
-							<section className="addTask">
-								<header className="AddTaskHeader">
-									<h2>Add a Task</h2>
-								</header>
-								<form className="addTaskForm">
-									<div>
-										<label htmlFor="taskName">Task Name</label>
-										<input type="text" className="addTaskName" id="taskName" />
-									</div>
-									<div>
-										<label htmlFor="addTaskNotes">Notes</label>
-										<textarea name="content" id="addTaskNotes" rows="5" cols="33" />
-									</div>
-									<div>
-										<label htmlFor="datePicker">Pick End Date</label>
-										<DatePicker
-											selected={this.state.startDate}
-											onChange={this.handleChange}
-											id="datePicker"
-											disabled={this.state.endChecked}
-										/>
-										<label>
-											<input
-												type="checkbox"
-												className="end_date_never"
-												id="end_date_never_checkbox"
-												onChange={this.validateEndDateNever}
-											/>
-											Never
-										</label>
-									</div>
-									<div>
-										<label htmlFor="categorySelect">Select Routine</label>
-										<select
-											id="categorySelect"
-											name="categoryId"
-											onChange={(e) => this.updateOption(e.target.value)}
-										>
-											<option value={null}>...</option>
-											{this.state.categories.map((category) => (
-												<option key={category.id} value={category.id}>
-													{category.title}
-												</option>
-											))}
-										</select>
-									</div>
-									<div className="add_task_cat_section">
-										<ul className="add_task_cat_list">
-											{weekdayList.map((weekday) => (
-												<li>
-													<label>
-														<input
-															type="checkbox"
-															className="add_task_check"
-															id="add_task_checkbox_list"
-															value={weekday}
-														/>
-														{weekday}
-													</label>
-												</li>
-											))}
-										</ul>
-										<ul className="add_task_cat_list">
-											{weeklyList.map((week) => (
-												<li>
-													<label>
-														<input
-															type="checkbox"
-															className="add_task_check"
-															id="add_task_checkbox_list"
-															value={week}
-														/>
-														{week}
-													</label>
-												</li>
-											))}
-										</ul>
-										<ul className="add_task_cat_list">
-											{monthlyList.map((month) => (
-												<li>
-													<label>
-														<input
-															type="checkbox"
-															className="add_task_check"
-															id="add_task_checkbox_list"
-															value={month}
-														/>
-														{month}
-													</label>
-												</li>
-											))}
-										</ul>
-									</div>
-								</form>
-							</section>
-						</main>
-					</section>
+					<Register />
+					<Dashboard />
+					<CategoryListMain />
+					<AddTask />
 				</div>
 			</ChoreContext.Provider>
 		);
