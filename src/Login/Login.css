@@ -1,0 +1,29 @@
+.loginForm form {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+
+	height: 40px;
+	background-color: grey;
+	color: whitesmoke;
+}
+
+/* .loginForm label {
+	display: inline-block;
+	width: 140px;
+	margin: 2px 5px;
+	text-align: right;
+} */
+
+.loginForm input {
+	/* display: inline-block; */
+	width: 180px;
+	border-radius: 2px;
+	margin: 0px 5px;
+}
+
+.loginForm button {
+	color: whitesmoke;
+	margin-right: 10px;
+}

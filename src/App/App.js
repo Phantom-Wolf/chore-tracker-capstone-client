@@ -6,9 +6,12 @@ import CategoryListMain from "../CategoryListMain/CategoryListMain";
 import Tasks from "../PracticeEntries";
 import ChoreContext from "../ChoreContext";
 import Register from "../Register/Register";
+import Login from "../Login/Login";
+import Landing, { LandingPage } from "../LandingPage/LandingPage";
 import Dashboard from "../Dashboard/Dashboard";
 import AddTask from "../AddTask/AddTask";
 import "react-datepicker/dist/react-datepicker.css";
+import { weekdayList, weeklyList, monthlyList } from "../STORE";
 
 Date.prototype.getWeekOfMonth = function (exact) {
 	let month = this.getMonth(),
@@ -39,8 +42,6 @@ export class App extends Component {
 			touched: false,
 			visible: "none",
 		},
-		startDate: new Date(),
-		endChecked: false,
 	};
 
 	componentDidMount() {
@@ -124,28 +125,20 @@ export class App extends Component {
 		});
 	};
 
-	// add task form - end date functions
-
-	validateEndDateNever = () => {
-		const cb = document.getElementById("end_date_never_checkbox");
-		if (cb.checked) {
-			this.setState({
-				endChecked: true,
-			});
-		} else {
-			this.setState({
-				endChecked: false,
-			});
-		}
-	};
-
-	handleDateSelection = (date) => {
-		this.setState({
-			startDate: date,
-		});
-	};
+	// routing
+	renderMainRoutes() {
+		return (
+			<>
+				<Route exact path="/" component={LandingPage} />
+				<Route path="/Home" component={Dashboard} />
+				<Route path="/Category/:category" component={CategoryListMain} />
+				<Route path="/AddTask" component={AddTask} />
+			</>
+		);
+	}
 
 	render() {
+		//full date format
 		const options1 = {
 			weekday: "long",
 			year: "numeric",
@@ -174,16 +167,16 @@ export class App extends Component {
 			handleDateSelection: this.handleDateSelection,
 			validateEndDateNever: this.validateEndDateNever,
 			updateOption: this.updateOption,
+			weekdayList: weekdayList,
+			weeklyList: weeklyList,
+			monthlyList: monthlyList,
 		};
 
 		console.log("state", this.state);
 		return (
 			<ChoreContext.Provider value={value}>
 				<div className="App">
-					<Register />
-					<Dashboard />
-					<CategoryListMain />
-					<AddTask />
+					<main>{this.renderMainRoutes()}</main>
 				</div>
 			</ChoreContext.Provider>
 		);

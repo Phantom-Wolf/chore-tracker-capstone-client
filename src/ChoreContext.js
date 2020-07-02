@@ -17,6 +17,9 @@ const ChoreContext = React.createContext({
 	handleDateSelection: () => {},
 	validateEndDateNever: () => {},
 	updateOption: () => {},
+	weekdayList: [],
+	weeklyList: [],
+	monthlyList: [],
 });
 
 export default ChoreContext;

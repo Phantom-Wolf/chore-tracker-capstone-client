@@ -13,17 +13,22 @@ export class CategoryListNav extends Component {
 			<section className="CategoryListNav">
 				<ul className="CategoryListNav_List">
 					<li>
-						<NavLink to={`/`} className="catNav">
+						<NavLink to={`/Home`} className="catNav">
 							<h3>Dashboard</h3>
 						</NavLink>
 					</li>
 					{categories.map((category) => (
 						<li key={category.id}>
-							<NavLink to={`/${category.title}/`} className="catNav">
+							<NavLink to={`/Category/${category.title}/`} className="catNav">
 								<h3>{category.title}</h3>
 							</NavLink>
 						</li>
 					))}
+					<li>
+						<NavLink to={`/AddTask`} className="catNav navAddTask">
+							<h3>Add Task</h3>
+						</NavLink>
+					</li>
 				</ul>
 			</section>
 		);

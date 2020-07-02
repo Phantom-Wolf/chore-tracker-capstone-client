@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import ValidateForm from "../ValidateForm/ValidateForm";
 import config from "../config";
-import "./Register.css";
+import "./Login.css";
 
-export class Register extends Component {
+export class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			error: null,
 			email: {
 				value: "",
 				touched: false,
@@ -15,14 +15,9 @@ export class Register extends Component {
 				value: "",
 				touched: false,
 			},
-			confirmPassword: {
-				value: "",
-				touched: false,
-			},
-			error: null,
 			params: {
-				registerEmail: "",
-				registerPassword: "",
+				loginEmail: "",
+				loginPassword: "",
 			},
 		};
 	}
@@ -35,10 +30,6 @@ export class Register extends Component {
 
 	updatePassword(password) {
 		this.setState({ password: { value: password, touched: true } });
-	}
-
-	updateConfirmPassword(confirmPassword) {
-		this.setState({ confirmPassword: { value: confirmPassword, touched: true } });
 	}
 
 	// credentials validations
@@ -63,16 +54,6 @@ export class Register extends Component {
 		}
 	}
 
-	validateConfirmPassword() {
-		let originalPassword = this.state.password.value;
-		let confirmPassword = this.state.confirmPassword.value;
-		if (originalPassword !== confirmPassword) {
-			return "Passwords to not match";
-		}
-	}
-
-	// submit to api
-
 	formatQueryParams(params) {
 		const queryItems = Object.keys(params).map(
 			(key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
@@ -80,7 +61,7 @@ export class Register extends Component {
 		return queryItems.join("&");
 	}
 
-	handleRegister = (e) => {
+	handleLogin = (e) => {
 		e.preventDefault();
 		//create an object to store the search filters
 		const data = {};
@@ -93,13 +74,13 @@ export class Register extends Component {
 			data[value[0]] = value[1];
 		}
 		console.log(data);
-		let { registerEmail, registerPassword } = data;
-		if (this.validateEmail(registerEmail) === "") {
+		let { loginEmail, loginPassword } = data;
+		if (this.validateEmail(loginEmail) === "") {
 			this.setState({
 				error: "email is not valid",
 			});
 		}
-		if (this.validatePassword(registerPassword) === "") {
+		if (this.validatePassword(loginPassword) === "") {
 			this.setState({
 				error: "password is not valid",
 			});
@@ -111,7 +92,7 @@ export class Register extends Component {
 		//check if the state is populated with the search params data
 		console.log(this.state.params);
 
-		const searchURL = `${config.API_ENDPOINT}/register`;
+		const searchURL = `${config.API_ENDPOINT}/login`;
 
 		const queryString = this.formatQueryParams(data);
 
@@ -157,59 +138,39 @@ export class Register extends Component {
 
 	render() {
 		return (
-			<section className="signUpForm">
-				<form onSubmit={this.handleRegister}>
+			<section className="loginForm">
+				<form onSubmit={this.handleLogin}>
 					<div>
-						<h2 className="signUpHeader">Sign Up</h2>
-						<label htmlFor="registerEmail">Email:</label>
-						<input
-							type="email"
-							name="registerEmail"
-							id="signupEmail"
-							onChange={(e) => this.updateEmail(e.target.value)}
-						/>
-						{this.state.email.touched && <ValidateForm message={this.validateEmail()} />}
+						<label htmlFor="logEmail">
+							Email:
+							<input
+								type="email"
+								name="loginEmail"
+								id="logEmail"
+								onChange={(e) => this.updateEmail(e.target.value)}
+							/>
+						</label>
 					</div>
 					<div>
-						<label htmlFor="signupPassword">Password:</label>
-						<input
-							type="text"
-							name="registerPassword"
-							id="signupPassword"
-							onChange={(e) => this.updatePassword(e.target.value)}
-						/>
-						{this.state.password.touched && <ValidateForm message={this.validatePassword()} />}
+						<label htmlFor="logPassword">
+							Password:
+							<input
+								type="password"
+								name="loginPassword"
+								id="logPassword"
+								onChange={(e) => this.updatePassword(e.target.value)}
+							/>
+						</label>
 					</div>
 					<div>
-						<label htmlFor="confirmPass">Confirm Password:</label>
-						<input
-							type="text"
-							id="confirmPass"
-							onChange={(e) => this.updateConfirmPassword(e.target.value)}
-						/>
-						{this.state.confirmPassword.touched && (
-							<ValidateForm message={this.validateConfirmPassword()} />
-						)}
-					</div>
-					<div>
-						<button
-							type="submit"
-							disabled={
-								this.validateEmail() || this.validatePassword() || this.validateConfirmPassword()
-							}
-						>
-							Sign Up
+						<button type="submit" disabled={this.validateEmail() || this.validatePassword()}>
+							Login
 						</button>
 					</div>
 				</form>
-				{this.state.error && (
-					<div>
-						<p className="error-message">{this.state.error}</p>
-					</div>
-				)}
 			</section>
 		);
 	}
 }
 
-export default Register;
+export default Login;

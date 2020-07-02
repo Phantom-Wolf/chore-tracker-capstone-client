@@ -1,76 +1,399 @@
 import React, { Component } from "react";
+import ValidateForm from "../ValidateForm/ValidateForm";
 import DatePicker from "react-datepicker";
 import ChoreContext from "../ChoreContext";
+import CircleButton from "../CircleButton/CircleButton";
+import config from "../config";
+import { Link } from "react-router-dom";
+
+function uncheckElements() {
+	let uncheck = document.getElementsById("add_task_checkbox_list");
+	for (let i = 0; i < uncheck.length; i++) {
+		if (uncheck[i].type == "checkbox") {
+			uncheck[i].checked = false;
+		}
+	}
+}
 
 export class AddTask extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			taskName: {
+				value: "",
+				touched: false,
+			},
+			notes: {
+				value: "",
+				touched: false,
+			},
+			categorySelect: {
+				id: "",
+				touched: false,
+			},
+			startDate: new Date(),
+			endDate: {
+				value: new Date(),
+				touched: false,
+			},
+			endChecked: false,
+			categoryWeekdays: [],
+			categoryWeeks: [],
+			categoryMonths: [],
+			error: null,
+			params: {
+				addTaskName: "",
+				addTaskNotes: "",
+				addTaskCategorySelect: "",
+				addTaskStartDate: new Date(),
+				addTaskEndDate: "",
+				addTaskEndDateNever: "",
+				addTaskcategoryWeekdays: [],
+				addTaskcategoryWeeks: [],
+				addTaskcategoryMonths: [],
+			},
+		};
+	}
+
 	static contextType = ChoreContext;
 
-	render() {
-		const { categories = [], startDate, endChecked } = this.context;
+	// update state
 
-		let weekdayList = [
-			"Sunday",
-			"Monday",
-			"Tuesday",
-			"Wednesday",
-			"Thursday",
-			"Friday",
-			"Saturday",
-		];
-		let weeklyList = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"];
-		let monthlyList = [
-			"January",
-			"February",
-			"March",
-			"April",
-			"May",
-			"June",
-			"July",
-			"August",
-			"September",
-			"October",
-			"November",
-			"December",
-		];
+	updateTaskName(taskName) {
+		this.setState({ taskName: { value: taskName, touched: true } });
+	}
+
+	updateNotes(notes) {
+		this.setState({ notes: { value: notes, touched: true } });
+	}
+
+	updateEndDate = (date) => {
+		this.setState({ endDate: { value: date, touched: true } });
+	};
+
+	updateCategorySelect(option) {
+		this.setState({
+			categorySelect: { id: option, touched: true },
+			categoryWeekdays: [],
+			categoryWeeks: [],
+			categoryMonths: [],
+		});
+		// let checks = document.querySelectorAll("ul.add_task_cat_list > li");
+
+		// console.log(checks);
+		// for (let i = 0; i < checks.length; i++) {
+		// 	let check = checks[i];
+		// 	if (!check.disabled) {
+		// 		check.checked = false;
+		// 	}
+		// }
+	}
+
+	updateWeekdays(weekday) {
+		let categoryDaysArray = this.state.categoryWeekdays;
+		if (!categoryDaysArray.includes(weekday)) {
+			this.setState({ categoryWeekdays: [...this.state.categoryWeekdays, weekday] });
+		} else {
+			let filteredDays = categoryDaysArray.filter((option) => option !== weekday);
+			this.setState({
+				categoryWeekdays: filteredDays,
+			});
+		}
+	}
+
+	updateWeeks(week) {
+		let categoryWeeksArray = this.state.categoryWeeks;
+		if (!categoryWeeksArray.includes(week)) {
+			this.setState({ categoryWeeks: [...this.state.categoryWeeks, week] });
+		} else {
+			let filteredWeeks = categoryWeeksArray.filter((option) => option !== week);
+			this.setState({
+				categoryWeeks: filteredWeeks,
+			});
+		}
+	}
+
+	updateMonths(month) {
+		let categoryMonthsArray = this.state.categoryMonths;
+		if (!categoryMonthsArray.includes(month)) {
+			this.setState({ categoryMonths: [...this.state.categoryMonths, month] });
+		} else {
+			let filteredMonths = categoryMonthsArray.filter((option) => option !== month);
+			this.setState({
+				categoryMonths: filteredMonths,
+			});
+		}
+	}
+
+	// validation code
+
+	validateTaskName() {
+		const taskName = this.state.taskName.value.trim();
+		if (taskName.length === 0) {
+			return "Task Name is required";
+		} else if (taskName.length < 2) {
+			return "Task Name must be atleast 2 characters long";
+		}
+	}
+
+	validateEndDate() {
+		let startDate = this.state.startDate;
+		let endDate = this.state.endDate.value;
+		if (this.state.endChecked === false) {
+			if (Date.parse(startDate) > Date.parse(endDate)) {
+				return "End date must occur after today's date";
+			}
+		}
+	}
+
+	validateEndDateNever = () => {
+		const cb = document.getElementById("end_date_never_checkbox");
+		if (cb.checked) {
+			this.setState({
+				endChecked: true,
+				endDate: { touched: true },
+			});
+		} else {
+			this.setState({
+				endChecked: false,
+				endDate: { value: new Date(), touched: false },
+			});
+		}
+	};
+
+	validateCategorySelect() {
+		const category = this.state.categorySelect.id.trim();
+		if (category.length === 0 || category.length === null || category === "...") {
+			return "You must choose a valid date category";
+		}
+	}
+
+	validateDateListSelection() {
+		if (
+			this.state.categoryWeekdays.length === 0 &&
+			this.state.categoryWeeks.length === 0 &&
+			this.state.categoryMonths.length === 0 &&
+			this.state.categorySelect.id !== "..."
+		) {
+			return "Please make atleast one selection";
+		}
+	}
+
+	showCategoryDateList(weekdayList, weeklyList, monthlyList) {
+		let htmlOutput = "";
+		if (parseInt(this.state.categorySelect.id) === 1) {
+			htmlOutput = (
+				<ul className="add_task_cat_list1">
+					{weekdayList.map((weekday) => (
+						<li key={weekday.id}>
+							<label>
+								<input
+									type="checkbox"
+									name="addTaskcategoryWeekdays"
+									className="add_task_check"
+									id="add_task_checkbox_list1"
+									value={weekday.name}
+									onChange={(e) => this.updateWeekdays(e.target.value)}
+								/>
+								{weekday.name}
+							</label>
+						</li>
+					))}
+				</ul>
+			);
+		} else if (parseInt(this.state.categorySelect.id) === 2) {
+			htmlOutput = (
+				<ul className="add_task_cat_list2">
+					{weeklyList.map((week) => (
+						<li key={week.id}>
+							<label>
+								<input
+									type="checkbox"
+									className="add_task_check"
+									name="addTaskcategoryWeeks"
+									id="add_task_checkbox_list2"
+									value={week.name}
+									onChange={(e) => this.updateWeeks(e.target.value)}
+								/>
+								{week.name}
+							</label>
+						</li>
+					))}
+				</ul>
+			);
+		} else if (parseInt(this.state.categorySelect.id) === 3) {
+			htmlOutput = (
+				<ul className="add_task_cat_list3">
+					{monthlyList.map((month) => (
+						<li key={month.id}>
+							<label>
+								<input
+									type="checkbox"
+									className="add_task_check"
+									name="addTaskcategoryMonths"
+									id="add_task_checkbox_list1"
+									value={month.name}
+									onChange={(e) => this.updateMonths(e.target.value)}
+								/>
+								{month.name}
+							</label>
+						</li>
+					))}
+				</ul>
+			);
+		}
+		return <div className="add_task_cat_section">{htmlOutput}</div>;
+	}
+
+	formatQueryParams(params) {
+		const queryItems = Object.keys(params).map(
+			(key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+		);
+		return queryItems.join("&");
+	}
+
+	handleTaskSubmit = (e) => {
+		e.preventDefault();
+		//create an object to store the search filters
+		const data = {};
+
+		//get all the from data from the form component
+		const formData = new FormData(e.target);
+		data.addTaskcategoryWeeks = [];
+		data.addTaskcategoryWeekdays = [];
+		data.addTaskcategoryMonths = [];
+		//for each of the keys in form data populate it with form value
+		for (let value of formData) {
+			if (value[0] == "addTaskcategoryWeeks") {
+				data.addTaskcategoryWeeks.push(value[1]);
+				// console.log(value[0], value[1]);
+			} else if (value[0] == "addTaskcategoryWeekdays") {
+				data.addTaskcategoryWeekdays.push(value[1]);
+			} else if (value[0] == "addTaskcategoryMonths") {
+				data.addTaskcategoryMonths.push(value[1]);
+			} else {
+				data[value[0]] = value[1];
+			}
+		}
+		console.log("data", data);
+		// let {
+		// 	addTaskName,
+		// 	addTaskNotes,
+		// 	addTaskCategorySelect,
+		// 	addTaskStartDate,
+		// 	addTaskEndDate,
+		// 	addTaskEndDateNever,
+		// 	addTaskcategoryWeekdays,
+		// 	addTaskcategoryWeeks,
+		// 	addTaskcategoryMonths,
+		// } = data;
+
+		//assigning the object from the form data to params in the state
+
+		this.setState({ params: data });
+
+		// check if the state is populated with the search params data
+		console.log("params", this.state.params);
+
+		const searchURL = `${config.API_ENDPOINT}/AddTask`;
+
+		const queryString = this.formatQueryParams(data);
+
+		//sent all the params to the final url
+		const url = searchURL + "?" + queryString;
+
+		console.log(url);
+
+		//define the API call parameters
+		const options = {
+			method: "POST",
+			header: {
+				Authorization: "",
+				"Content-Type": "application/json",
+			},
+		};
+
+		//using the url and paramters above make the api call
+		fetch(url, options)
+			// if the api returns data ...
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error("Something went wrong, please try again later.");
+				}
+				// ... convert it to json
+				return res.json();
+			})
+			// use the json api output
+			.then((data) => {
+				//check if there is meaningfull data
+				console.log(data);
+				// check if there are no results
+				if (data.totalItems === 0) {
+					throw new Error("No data found");
+				}
+			})
+			.catch((err) => {
+				this.setState({
+					error: err.message,
+				});
+			});
+	};
+
+	render() {
+		// import selected context values
+		const { categories = [], weekdayList = [], weeklyList = [], monthlyList = [] } = this.context;
 
 		return (
 			<section className="addTask">
+				<CircleButton tag={Link} to="/home" type="button" className="AddTask__home-button">
+					Home
+				</CircleButton>
 				<header className="AddTaskHeader">
 					<h2>Add a Task</h2>
 				</header>
-				<form className="addTaskForm">
+				<form className="addTaskForm" onSubmit={this.handleTaskSubmit}>
 					<div>
 						<label htmlFor="taskName">Task Name</label>
-						<input type="text" className="addTaskName" id="taskName" />
+						<input
+							type="text"
+							name="addTaskName"
+							className="addTaskName"
+							id="taskName"
+							onChange={(e) => this.updateTaskName(e.target.value)}
+						/>
+						{this.state.taskName.touched && <ValidateForm message={this.validateTaskName()} />}
 					</div>
 					<div>
 						<label htmlFor="addTaskNotes">Notes</label>
-						<textarea name="content" id="addTaskNotes" rows="5" cols="33" />
+						<textarea name="addTaskNotes" id="addTaskNotes" rows="5" cols="33" />
 					</div>
 					<div>
 						<label htmlFor="datePicker">Pick End Date</label>
 						<DatePicker
-							selected={startDate}
-							onChange={this.context.handleDateSelection}
 							id="datePicker"
-							disabled={endChecked}
+							name="addTaskEndDate"
+							selected={this.state.endDate.value}
+							onChange={this.updateEndDate}
+							disabled={this.state.endChecked}
 						/>
 						<label>
 							<input
 								type="checkbox"
 								className="end_date_never"
+								name="addTaskEndDateNever"
 								id="end_date_never_checkbox"
-								onChange={this.context.validateEndDateNever}
+								onChange={this.validateEndDateNever}
 							/>
 							Never
 						</label>
+						{this.state.endDate.touched && <ValidateForm message={this.validateEndDate()} />}
 					</div>
 					<div>
 						<label htmlFor="categorySelect">Select Routine</label>
 						<select
 							id="categorySelect"
-							name="categoryId"
-							onChange={(e) => this.context.updateOption(e.target.value)}
+							name="addTaskCategorySelect"
+							onChange={(e) => this.updateCategorySelect(e.target.value)}
 						>
 							<option value={null}>...</option>
 							{categories.map((category) => (
@@ -79,53 +402,26 @@ export class AddTask extends Component {
 								</option>
 							))}
 						</select>
+						{this.state.categorySelect.touched && (
+							<ValidateForm message={this.validateCategorySelect()} />
+						)}
 					</div>
-					<div className="add_task_cat_section">
-						<ul className="add_task_cat_list">
-							{weekdayList.map((weekday) => (
-								<li>
-									<label>
-										<input
-											type="checkbox"
-											className="add_task_check"
-											id="add_task_checkbox_list"
-											value={weekday}
-										/>
-										{weekday}
-									</label>
-								</li>
-							))}
-						</ul>
-						<ul className="add_task_cat_list">
-							{weeklyList.map((week) => (
-								<li>
-									<label>
-										<input
-											type="checkbox"
-											className="add_task_check"
-											id="add_task_checkbox_list"
-											value={week}
-										/>
-										{week}
-									</label>
-								</li>
-							))}
-						</ul>
-						<ul className="add_task_cat_list">
-							{monthlyList.map((month) => (
-								<li>
-									<label>
-										<input
-											type="checkbox"
-											className="add_task_check"
-											id="add_task_checkbox_list"
-											value={month}
-										/>
-										{month}
-									</label>
-								</li>
-							))}
-						</ul>
+					{this.showCategoryDateList(weekdayList, weeklyList, monthlyList)}
+					{this.state.categorySelect.touched && (
+						<ValidateForm message={this.validateDateListSelection()} />
+					)}
+					<div>
+						<button
+							type="submit"
+							disabled={
+								this.validateTaskName() ||
+								this.validateEndDate() ||
+								this.validateCategorySelect() ||
+								this.validateDateListSelection()
+							}
+						>
+							Sign Up
+						</button>
 					</div>
 				</form>
 			</section>
