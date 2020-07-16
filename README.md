@@ -108,39 +108,41 @@ The app's functionality includes:
 
 - **Index.js** (stateless)
   - **App.js** (stateful)
-    - **LandingPage.js** (stateful) - gets the _"prop name"_ and the _"callback prop name"_ from the **App.js**
-      - **Login.js** (stateful) -
-      - **Register.js** (stateful) -
     - **Context.Provider** (stateless) -
-      - **CategoryListNav.js** (stateless) -
+      - **LandingPage.js** (stateful) - gets the _"prop name"_ and the _"callback prop name"_ from the **App.js**
+        - **Login.js** (stateful) -
+        - **Register.js** (stateful) -
       - **Dashboard.js** (stateful) -
-      - **CategoryListMain.js** (stateful) -
+        - **CategoryListNav.js** (stateless) 
+      - **CategoryListMain.js** (stateful) 
+        - **CategoryListNav.js** (stateless) 
+          - **AddTask.js** (stateful) -
         - **Task.js** (stateful) -
-        - **AddTask.js** (stateful) -
+        
 
 ## Back-end Structure - Business Objects
 
 - user (DATABASE table)
 
   - user id
-  - email (email validation)
-  - password (at least 8 chars, 1 alpha, 1 special)
+  - user_email (email validation)
+  - user_password (at least 8 chars, 1 alpha, 1 special)
 
 - event (DATABASE table)
 
   - event id
-  - user id
+  - user_id
   - title (varchar)
   - notes (text)
   - recurrence (weekday, weekly, monthly)
-  - recurrence specifics (Monday, 2nd and 4th week of the month, January)
-  - start date (date)
-  - end date (date)
+  - recurrence_specifics (Monday, 2nd and 4th week of the month, January)
+  - date_created (date)
+  - date_ended (date)
 
 - tasks (DATABASE table)
   - task id
-  - event id
-  - date of the task (date)
+  - event_id
+  - date_of_task (date)
   - task_status (checked / un-checked)
   - task_completion_date (date)
 
@@ -176,5 +178,3 @@ Use command line to navigate into the project folder and run the following in te
 - To install the react project ===> npm install
 - To run react (on port 3000) ===> npm start
 - To run tests ===> npm run test
-
-

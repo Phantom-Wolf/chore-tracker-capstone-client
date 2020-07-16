@@ -3,6 +3,7 @@ import ValidateForm from "../ValidateForm/ValidateForm";
 import DatePicker from "react-datepicker";
 import ChoreContext from "../ChoreContext";
 import CircleButton from "../CircleButton/CircleButton";
+import TokenService from "../services/token-service";
 import config from "../config";
 import { Link } from "react-router-dom";
 
@@ -42,15 +43,12 @@ export class AddTask extends Component {
 			categoryMonths: [],
 			error: null,
 			params: {
-				addTaskName: "",
-				addTaskNotes: "",
-				addTaskCategorySelect: "",
-				addTaskStartDate: new Date(),
-				addTaskEndDate: "",
-				addTaskEndDateNever: "",
-				addTaskcategoryWeekdays: [],
-				addTaskcategoryWeeks: [],
-				addTaskcategoryMonths: [],
+				title: "",
+				notes: "",
+				recurrence: "",
+				date_created: new Date(),
+				date_ended: "",
+				recurrence_specifics: "",
 			},
 		};
 	}
@@ -276,46 +274,42 @@ export class AddTask extends Component {
 			}
 		}
 		console.log("data", data);
-		// let {
-		// 	addTaskName,
-		// 	addTaskNotes,
-		// 	addTaskCategorySelect,
-		// 	addTaskStartDate,
-		// 	addTaskEndDate,
-		// 	addTaskEndDateNever,
-		// 	addTaskcategoryWeekdays,
-		// 	addTaskcategoryWeeks,
-		// 	addTaskcategoryMonths,
-		// } = data;
+
+		let specificsOutput = "";
+
+		if (data.addTaskcategoryWeeks.length !== 0) {
+			specificsOutput = JSON.stringify(data.addTaskcategoryWeeks);
+		} else if (data.addTaskcategoryWeekdays.length !== 0) {
+			specificsOutput = JSON.stringify(data.addTaskcategoryWeekdays);
+		} else {
+			specificsOutput = JSON.stringify(data.addTaskcategoryMonths);
+		}
+
+		let stateData = {
+			title: data.addTaskName,
+			notes: data.addTaskNotes,
+			recurrence: data.addTaskCategorySelect,
+			date_created: new Date(),
+			date_ended: data.addTaskEndDate,
+			recurrence_specifics: specificsOutput,
+		};
+		console.log("stateDate", stateData);
 
 		//assigning the object from the form data to params in the state
 
-		this.setState({ params: data });
+		this.setState({ params: stateData });
 
 		// check if the state is populated with the search params data
 		console.log("params", this.state.params);
 
-		const searchURL = `${config.API_ENDPOINT}/AddTask`;
-
-		const queryString = this.formatQueryParams(data);
-
-		//sent all the params to the final url
-		const url = searchURL + "?" + queryString;
-
-		console.log(url);
-
-		//define the API call parameters
-		const options = {
+		fetch(`${config.API_ENDPOINT}/api/events`, {
 			method: "POST",
-			header: {
-				Authorization: "",
-				"Content-Type": "application/json",
+			body: JSON.stringify(stateData),
+			headers: {
+				"content-type": "application/json",
+				authorization: `bearer ${TokenService.getAuthToken()}`,
 			},
-		};
-
-		//using the url and paramters above make the api call
-		fetch(url, options)
-			// if the api returns data ...
+		})
 			.then((res) => {
 				if (!res.ok) {
 					throw new Error("Something went wrong, please try again later.");

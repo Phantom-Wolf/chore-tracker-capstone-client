@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Switch, Redirect } from "react-router-dom";
+import TokenService from "../services/token-service";
 
 import CategoryListMain from "../CategoryListMain/CategoryListMain";
 import Tasks from "../PracticeEntries";
@@ -128,12 +129,12 @@ export class App extends Component {
 	// routing
 	renderMainRoutes() {
 		return (
-			<>
-				<Route exact path="/" component={LandingPage} />
+			<Switch>
+				<Route path="/login" component={LandingPage} />
 				<Route path="/Home" component={Dashboard} />
 				<Route path="/Category/:category" component={CategoryListMain} />
 				<Route path="/AddTask" component={AddTask} />
-			</>
+			</Switch>
 		);
 	}
 
@@ -176,7 +177,10 @@ export class App extends Component {
 		return (
 			<ChoreContext.Provider value={value}>
 				<div className="App">
-					<main>{this.renderMainRoutes()}</main>
+					<main>
+						{this.renderMainRoutes()}
+						{TokenService.hasAuthToken() ? console.log("hello") : <Redirect to="/login" />}
+					</main>
 				</div>
 			</ChoreContext.Provider>
 		);

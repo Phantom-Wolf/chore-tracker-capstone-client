@@ -21,8 +21,8 @@ export class Register extends Component {
 			},
 			error: null,
 			params: {
-				registerEmail: "",
-				registerPassword: "",
+				user_email: "",
+				user_password: "",
 			},
 		};
 	}
@@ -73,13 +73,6 @@ export class Register extends Component {
 
 	// submit to api
 
-	formatQueryParams(params) {
-		const queryItems = Object.keys(params).map(
-			(key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
-		);
-		return queryItems.join("&");
-	}
-
 	handleRegister = (e) => {
 		e.preventDefault();
 		//create an object to store the search filters
@@ -93,13 +86,13 @@ export class Register extends Component {
 			data[value[0]] = value[1];
 		}
 		console.log(data);
-		let { registerEmail, registerPassword } = data;
-		if (this.validateEmail(registerEmail) === "") {
+		let { user_email, user_password } = data;
+		if (this.validateEmail(user_email) === "") {
 			this.setState({
 				error: "email is not valid",
 			});
 		}
-		if (this.validatePassword(registerPassword) === "") {
+		if (this.validatePassword(user_password) === "") {
 			this.setState({
 				error: "password is not valid",
 			});
@@ -111,27 +104,19 @@ export class Register extends Component {
 		//check if the state is populated with the search params data
 		console.log(this.state.params);
 
-		const searchURL = `${config.API_ENDPOINT}/register`;
-
-		const queryString = this.formatQueryParams(data);
-
-		//sent all the params to the final url
-		const url = searchURL + "?" + queryString;
-
-		console.log(url);
-
-		//define the API call parameters
-		const options = {
-			method: "POST",
-			header: {
-				Authorization: "",
-				"Content-Type": "application/json",
-			},
+		const newUser = {
+			user_email: this.state.params.user_email,
+			user_password: this.state.params.user_password,
 		};
-
-		//useing the url and paramters above make the api call
-		fetch(url, options)
-			// if the api returns data ...
+		console.log(newUser);
+		this.setState({ error: null });
+		fetch(`${config.API_ENDPOINT}/api/users`, {
+			method: "POST",
+			body: JSON.stringify(newUser),
+			headers: {
+				"content-type": "application/json",
+			},
+		})
 			.then((res) => {
 				if (!res.ok) {
 					throw new Error("Something went wrong, please try again later.");
@@ -164,7 +149,7 @@ export class Register extends Component {
 						<label htmlFor="registerEmail">Email:</label>
 						<input
 							type="email"
-							name="registerEmail"
+							name="user_email"
 							id="signupEmail"
 							onChange={(e) => this.updateEmail(e.target.value)}
 						/>
@@ -174,7 +159,7 @@ export class Register extends Component {
 						<label htmlFor="signupPassword">Password:</label>
 						<input
 							type="text"
-							name="registerPassword"
+							name="user_password"
 							id="signupPassword"
 							onChange={(e) => this.updatePassword(e.target.value)}
 						/>

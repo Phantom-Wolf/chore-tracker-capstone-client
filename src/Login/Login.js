@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import config from "../config";
 import "./Login.css";
+import { Link } from "react-router-dom";
+import TokenService from "../services/token-service";
+import AuthApiService from "../services/auth-api-service";
+import ChoreContext from "../ChoreContext";
 
 export class Login extends Component {
 	constructor(props) {
@@ -21,6 +25,8 @@ export class Login extends Component {
 			},
 		};
 	}
+
+	static contextType = ChoreContext;
 
 	// input credentials into state
 
@@ -89,45 +95,38 @@ export class Login extends Component {
 
 		this.setState({ params: data });
 
-		//check if the state is populated with the search params data
-		console.log(this.state.params);
-
-		const searchURL = `${config.API_ENDPOINT}/login`;
-
-		const queryString = this.formatQueryParams(data);
-
-		//sent all the params to the final url
-		const url = searchURL + "?" + queryString;
-
-		console.log(url);
-
-		//define the API call parameters
-		const options = {
-			method: "POST",
-			header: {
-				Authorization: "",
-				"Content-Type": "application/json",
-			},
+		let stateData = {
+			user_email: data.loginEmail,
+			user_password: data.loginPassword,
 		};
 
-		//useing the url and paramters above make the api call
-		fetch(url, options)
+		fetch(`${config.API_ENDPOINT}/api/auth/login`, {
+			method: "POST",
+			body: JSON.stringify(stateData),
+			headers: {
+				"content-type": "application/json",
+			},
+		})
 			// if the api returns data ...
 			.then((res) => {
 				if (!res.ok) {
 					throw new Error("Something went wrong, please try again later.");
 				}
-				// ... convert it to json
+				console.log("res", res);
 				return res.json();
 			})
 			// use the json api output
 			.then((data) => {
 				//check if there is meaningfull data
-				console.log(data);
+				console.log("res data", data);
+				TokenService.saveAuthToken(data.authToken);
 				// check if there are no results
+
 				if (data.totalItems === 0) {
 					throw new Error("No data found");
 				}
+
+				window.location = "/home";
 			})
 			.catch((err) => {
 				this.setState({
