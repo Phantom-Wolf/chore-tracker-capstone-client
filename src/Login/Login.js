@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import config from "../config";
 import "./Login.css";
-import { Link } from "react-router-dom";
 import TokenService from "../services/token-service";
-import AuthApiService from "../services/auth-api-service";
 import ChoreContext from "../ChoreContext";
 
 export class Login extends Component {
@@ -54,7 +52,7 @@ export class Login extends Component {
 		let inputPassword = this.state.password.value;
 		// at least one number, one lowercase and one uppercase letter
 		// at least eight characters that are letters, numbers or the underscore
-		let passwordformat = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{8,}$/;
+		let passwordformat = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
 		if (!inputPassword.match(passwordformat)) {
 			return "Password must be atleast 8 characters long and it must include atleast one number, one lowercase and one uppercase letter.";
 		}

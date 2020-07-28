@@ -55,11 +55,11 @@ export class Register extends Component {
 
 	validatePassword() {
 		let inputPassword = this.state.password.value;
-		// at least one number, one lowercase and one uppercase letter
+		// at least one number, one lowercase and one uppercase letter, one special character
 		// at least eight characters that are letters, numbers or the underscore
-		let passwordformat = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{8,}$/;
+		let passwordformat = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
 		if (!inputPassword.match(passwordformat)) {
-			return "Password must be atleast 8 characters long and it must include atleast one number, one lowercase and one uppercase letter.";
+			return "Password must contain 1 upper case, lower case, number and special character";
 		}
 	}
 

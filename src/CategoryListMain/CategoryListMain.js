@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./CategoryListMain.css";
 import CategoryListNav from "../CategoryListNav/CategoryListNav";
 import ChoreContext from "../ChoreContext";
+import config from "../config";
+import TokenService from "../services/token-service";
 
 const options1 = {
 	weekday: "long",
@@ -19,6 +21,26 @@ export class CategoryListMain extends Component {
 			params: {},
 		},
 	};
+
+	// componentDidMount() {
+	// 	fetch(`${config.API_ENDPOINT}/api/events`, {
+	// 		method: "GET",
+	// 		headers: { authorization: `bearer ${TokenService.getAuthToken()}` },
+	// 	})
+	// 		.then((res) => {
+	// 			if (!res.ok) {
+	// 				throw new Error("Something went wrong, please try again later.");
+	// 			}
+	// 			return res.json();
+	// 		})
+	// 		.then((res) => {
+	// 			console.log("Events List", res);
+	// 			this.context.grabEvents(res);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log("error:", err);
+	// 		});
+	// }
 
 	static contextType = ChoreContext;
 
@@ -41,6 +63,13 @@ export class CategoryListMain extends Component {
 						{this.context.weekdayList.map((weekday) => (
 							<li key={weekday.id}>
 								<h3>{weekday.name}</h3>
+								<ul>
+									{this.context.events.map((event) => {
+										if (event.recurrence_specifics.includes(weekday.name)) {
+											return <li key={event.id}>{event.title}</li>;
+										}
+									})}
+								</ul>
 							</li>
 						))}
 					</ul>
@@ -62,6 +91,16 @@ export class CategoryListMain extends Component {
 						{this.context.weeklyList.map((week) => (
 							<li key={week.id}>
 								<h3>{week.name}</h3>
+								<ul>
+									{this.context.events.map((event) => {
+										if (event.recurrence_specifics.includes(week.name)) {
+											console.log(event.title);
+											return <li key={event.id}>{event.title}</li>;
+										} else {
+											console.log("false match");
+										}
+									})}
+								</ul>
 							</li>
 						))}
 					</ul>
@@ -83,6 +122,16 @@ export class CategoryListMain extends Component {
 						{this.context.monthlyList.map((month) => (
 							<li key={month.id}>
 								<h3>{month.name}</h3>
+								<ul>
+									{this.context.events.map((event) => {
+										if (event.recurrence_specifics.includes(month.name)) {
+											console.log(event.title);
+											return <li key={event.id}>{event.title}</li>;
+										} else {
+											console.log("false match");
+										}
+									})}
+								</ul>
 							</li>
 						))}
 					</ul>
