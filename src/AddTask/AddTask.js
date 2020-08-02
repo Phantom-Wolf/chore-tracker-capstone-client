@@ -7,15 +7,6 @@ import TokenService from "../services/token-service";
 import config from "../config";
 import { Link } from "react-router-dom";
 
-function uncheckElements() {
-	let uncheck = document.getElementsById("add_task_checkbox_list");
-	for (let i = 0; i < uncheck.length; i++) {
-		if (uncheck[i].type == "checkbox") {
-			uncheck[i].checked = false;
-		}
-	}
-}
-
 export class AddTask extends Component {
 	constructor(props) {
 		super(props);
@@ -76,15 +67,6 @@ export class AddTask extends Component {
 			categoryWeeks: [],
 			categoryMonths: [],
 		});
-		// let checks = document.querySelectorAll("ul.add_task_cat_list > li");
-
-		// console.log(checks);
-		// for (let i = 0; i < checks.length; i++) {
-		// 	let check = checks[i];
-		// 	if (!check.disabled) {
-		// 		check.checked = false;
-		// 	}
-		// }
 	}
 
 	updateWeekdays(weekday) {
@@ -149,12 +131,17 @@ export class AddTask extends Component {
 		if (cb.checked) {
 			this.setState({
 				endChecked: true,
-				endDate: { touched: true },
+				endDate: { value: null, touched: true },
+			});
+		} else if (!cb.checked && this.state.endDate.value == null) {
+			this.setState({
+				endChecked: false,
+				endDate: { value: new Date(), touched: false },
 			});
 		} else {
 			this.setState({
 				endChecked: false,
-				endDate: { value: new Date(), touched: false },
+				endDate: { touched: false },
 			});
 		}
 	};
@@ -260,20 +247,18 @@ export class AddTask extends Component {
 		data.addTaskcategoryWeeks = [];
 		data.addTaskcategoryWeekdays = [];
 		data.addTaskcategoryMonths = [];
-		//for each of the keys in form data populate it with form value
+		//for each of the keys in form data populate it with form value ***************
 		for (let value of formData) {
-			if (value[0] == "addTaskcategoryWeeks") {
+			if (value[0] === "addTaskcategoryWeeks") {
 				data.addTaskcategoryWeeks.push(value[1]);
-				// console.log(value[0], value[1]);
-			} else if (value[0] == "addTaskcategoryWeekdays") {
+			} else if (value[0] === "addTaskcategoryWeekdays") {
 				data.addTaskcategoryWeekdays.push(value[1]);
-			} else if (value[0] == "addTaskcategoryMonths") {
+			} else if (value[0] === "addTaskcategoryMonths") {
 				data.addTaskcategoryMonths.push(value[1]);
 			} else {
 				data[value[0]] = value[1];
 			}
 		}
-		console.log("data", data);
 
 		let specificsOutput = "";
 
@@ -299,9 +284,6 @@ export class AddTask extends Component {
 
 		this.setState({ params: stateData });
 
-		// check if the state is populated with the search params data
-		console.log("params", this.state.params);
-
 		fetch(`${config.API_ENDPOINT}/api/events`, {
 			method: "POST",
 			body: JSON.stringify(stateData),
@@ -319,12 +301,11 @@ export class AddTask extends Component {
 			})
 			// use the json api output
 			.then((data) => {
-				//check if there is meaningfull data
-				console.log(data);
 				// check if there are no results
 				if (data.totalItems === 0) {
 					throw new Error("No data found");
 				}
+				window.location = "/home";
 			})
 			.catch((err) => {
 				this.setState({
@@ -414,7 +395,7 @@ export class AddTask extends Component {
 								this.validateDateListSelection()
 							}
 						>
-							Sign Up
+							Add Task
 						</button>
 					</div>
 				</form>

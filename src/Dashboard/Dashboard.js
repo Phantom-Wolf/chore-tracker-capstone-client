@@ -97,28 +97,25 @@ export class CategoryListMain extends Component {
 										if (
 											category.title === "Weekdays" &&
 											task.taskCat === category.title &&
-											parseInt(task.date_of_task.getDate()) === parseInt(this.context.day)
+											parseInt(task.date_of_task.getDate()) === parseInt(this.context.day) &&
+											task.date_of_task.getMonth() + 1 === this.context.monthNumber
 										) {
 											return <li key={task.id}>{task.taskTitle} </li>;
 										} else if (
 											category.title === "Monthly" &&
 											task.taskCat === category.title &&
-											parseInt(task.date_of_task.getMonth() + 1) ===
-												parseInt(this.context.monthNumber) &&
-											parseInt(task.date_of_task.getFullYear()) === parseInt(this.context.year)
+											task.date_of_task.getMonth() + 1 === this.context.monthNumber &&
+											task.date_of_task.getFullYear() === this.context.year
 										) {
 											return <li key={task.id}>{task.taskTitle} </li>;
 										} else if (
 											category.title === "Weekly" &&
 											task.taskCat === category.title &&
-											task.task_recurrence_specifics.includes(this.context.weekOfMonth) &&
-											parseInt(task.date_of_task.getMonth() + 1) ===
-												parseInt(this.context.monthNumber) &&
-											parseInt(task.date_of_task.getFullYear()) === parseInt(this.context.year)
+											task.date_of_task >= new Date(this.context.firstOfWeekDate) &&
+											task.date_of_task <= new Date(this.context.lastOfWeekDate)
 										) {
 											return <li key={task.id}>{task.taskTitle} </li>;
 										}
-										
 									})}
 								</ul>
 							</section>

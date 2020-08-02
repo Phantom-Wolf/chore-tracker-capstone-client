@@ -2,18 +2,7 @@ import React, { Component } from "react";
 import "./CategoryListMain.css";
 import CategoryListNav from "../CategoryListNav/CategoryListNav";
 import ChoreContext from "../ChoreContext";
-import config from "../config";
-import TokenService from "../services/token-service";
 
-const options1 = {
-	weekday: "long",
-	year: "numeric",
-	month: "long",
-	day: "numeric",
-	week: "numeric",
-};
-let date1 = new Date();
-const dateTimeFormat3 = new Intl.DateTimeFormat("en-US", options1);
 
 export class CategoryListMain extends Component {
 	static defaultProps = {
@@ -22,25 +11,6 @@ export class CategoryListMain extends Component {
 		},
 	};
 
-	// componentDidMount() {
-	// 	fetch(`${config.API_ENDPOINT}/api/events`, {
-	// 		method: "GET",
-	// 		headers: { authorization: `bearer ${TokenService.getAuthToken()}` },
-	// 	})
-	// 		.then((res) => {
-	// 			if (!res.ok) {
-	// 				throw new Error("Something went wrong, please try again later.");
-	// 			}
-	// 			return res.json();
-	// 		})
-	// 		.then((res) => {
-	// 			console.log("Events List", res);
-	// 			this.context.grabEvents(res);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log("error:", err);
-	// 		});
-	// }
 
 	static contextType = ChoreContext;
 
@@ -50,7 +20,7 @@ export class CategoryListMain extends Component {
 		if (category === "Weekdays") {
 			htmlOutput = (
 				<section className="CategoryPage">
-					<p className="cat_page_date">{dateTimeFormat3.format(date1)}</p>
+					<p className="cat_page_date">{this.context.currentDate}</p>
 
 					<header className="CategoryPageHeader">
 						<h2>Weekdays</h2>
@@ -78,7 +48,7 @@ export class CategoryListMain extends Component {
 		} else if (category === "Weekly") {
 			htmlOutput = (
 				<section className="CategoryPage">
-					<p className="cat_page_date">{dateTimeFormat3.format(date1)}</p>
+					<p className="cat_page_date">{this.context.currentDate}</p>
 
 					<header className="CategoryPageHeader">
 						<h2>Weeks</h2>
@@ -109,7 +79,7 @@ export class CategoryListMain extends Component {
 		} else if (category === "Monthly") {
 			htmlOutput = (
 				<section className="CategoryPage">
-					<p className="cat_page_date">{dateTimeFormat3.format(date1)}</p>
+					<p className="cat_page_date">{this.context.currentDate}</p>
 
 					<header className="CategoryPageHeader">
 						<h2>Months</h2>
@@ -142,15 +112,6 @@ export class CategoryListMain extends Component {
 	}
 
 	render() {
-		// import selected context values
-		// const {
-		// 	weekday,
-		// 	weekOfMonth,
-		// 	month,
-		// 	weekdayList = [],
-		// 	weeklyList = [],
-		// 	monthlyList = [],
-		// } = this.context;
 
 		return <>{this.renderCategories(this.props.match.params.category)}</>;
 	}

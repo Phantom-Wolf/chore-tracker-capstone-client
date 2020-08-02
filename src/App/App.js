@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, Link, Switch, Redirect } from "react-router-dom";
-import TokenService from "../services/token-service";
+import { Route, Switch } from "react-router-dom";
 import CategoryListMain from "../CategoryListMain/CategoryListMain";
 import ChoreContext from "../ChoreContext";
 import LandingPage from "../LandingPage/LandingPage";
@@ -10,18 +9,6 @@ import AddTask from "../AddTask/AddTask";
 import "react-datepicker/dist/react-datepicker.css";
 import { weekdayList, weeklyList, monthlyList } from "../STORE";
 
-// Date.prototype.getWeekOfMonth = function (exact) {
-// 	let month = this.getMonth(),
-// 		year = this.getFullYear(),
-// 		firstWeekday = new Date(year, month, 1).getDay(),
-// 		lastDateOfMonth = new Date(year, month + 1, 0).getDate(),
-// 		offsetDate = this.getDate() + firstWeekday - 1,
-// 		index = 1, // start index at 0 or 1, your choice
-// 		weeksInMonth = index + Math.ceil((lastDateOfMonth + firstWeekday - 7) / 7),
-// 		week = index + Math.floor(offsetDate / 7);
-// 	if (exact || week < 2 + index) return week;
-// 	return week === weeksInMonth ? index + 5 : week;
-// };
 function getWeekOfMonth(date) {
 	const startWeekDayIndex = 1; // 1 MonthDay 0 Sundays
 	const firstDate = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -136,6 +123,7 @@ export class App extends Component {
 			let newTaskList = [];
 			this.state.tasks.map((task) => {
 				task.date_of_task = new Date(task.date_of_task);
+
 				// grab event object from state by given ID in task object
 				let taskEventSharedMatch = this.state.events.find(
 					(event) => parseInt(event.id) === parseInt(task.event_id)
@@ -143,8 +131,6 @@ export class App extends Component {
 				// grab category number from reccurence property
 				let taskEventCategory = parseInt(taskEventSharedMatch.recurrence);
 				// translate category number to corresponding text
-
-				console.log("task recurrence", taskEventCategory);
 				if (taskEventCategory === 1) {
 					taskEventCategory = "Weekdays";
 				} else if (taskEventCategory === 2) {
@@ -170,40 +156,6 @@ export class App extends Component {
 			});
 		}
 	};
-
-	// alterTaskList = (taskList) => {
-	// 	let newTaskList = [];
-	// 	this.state.tasks.map((task) => {
-	// 		task.date_of_task = new Date(task.date_of_task);
-	// 		// grab event object from state by given ID in task object
-	// 		let taskEventSharedMatch = this.state.events.find(
-	// 			(event) => parseInt(event.id) === parseInt(task.event_id)
-	// 		);
-	// 		// grab category number from reccurence property
-	// 		let taskEventCategory = parseInt(taskEventSharedMatch.recurrence);
-	// 		// translate category number to corresponding text
-
-	// 		console.log("task recurrence", taskEventCategory);
-	// 		if (taskEventCategory === 1) {
-	// 			taskEventCategory = "Weekdays";
-	// 		} else if (taskEventCategory === 2) {
-	// 			taskEventCategory = "Weekly";
-	// 		} else {
-	// 			taskEventCategory = "Monthly";
-	// 		}
-	// 		// create new object with category value
-	// 		let taskCategory = {
-	// 			taskCat: taskEventCategory,
-	// 			taskTitle: taskEventSharedMatch.title,
-	// 		};
-
-	// 		// push object with new value into existing task
-	// 		let newTask = Object.assign(task, taskCategory);
-	// 		// push updated task into a new task list
-	// 		newTaskList.push(newTask);
-	// 	});
-	// 	return newTaskList;
-	// };
 
 	// routing
 	renderMainRoutes() {
@@ -252,6 +204,7 @@ export class App extends Component {
 			weekdayList: weekdayList,
 			weeklyList: weeklyList,
 			monthlyList: monthlyList,
+			currentDate: dateTimeFormat3.format(date1),
 		};
 
 		return (

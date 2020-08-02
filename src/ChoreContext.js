@@ -23,6 +23,7 @@ const ChoreContext = React.createContext({
 	weekdayList: [],
 	weeklyList: [],
 	monthlyList: [],
+	currentDate: null,
 });
 
 export default ChoreContext;
