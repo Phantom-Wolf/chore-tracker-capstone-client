@@ -28,3 +28,12 @@
 	transition: ease-in, 0.5s;
 	background-color: rgb(53, 53, 53);
 }
+
+.CategoryListNav_List .logout {
+	background-color: rgb(24, 24, 24);
+}
+
+.CategoryListNav_List .logout:hover {
+	transition: ease-in, 0.5s;
+	background-color: rgb(53, 53, 53);
+}

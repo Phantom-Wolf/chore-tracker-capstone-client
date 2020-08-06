@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import CategoryListMain from "../CategoryListMain/CategoryListMain";
 import ChoreContext from "../ChoreContext";
 import LandingPage from "../LandingPage/LandingPage";
 import Dashboard from "../Dashboard/Dashboard";
 import AddTask from "../AddTask/AddTask";
+import EventPage from "../EventPage/EventPage";
 import "react-datepicker/dist/react-datepicker.css";
 import { weekdayList, weeklyList, monthlyList } from "../STORE";
+import PrivateRoute from "../Utils/PrivateRoute";
+import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
 
 function getWeekOfMonth(date) {
-	const startWeekDayIndex = 1; // 1 MonthDay 0 Sundays
+	const startWeekDayIndex = 0; // 1 MonthDay 0 Sundays
 	const firstDate = new Date(date.getFullYear(), date.getMonth(), 1);
 	const firstDay = firstDate.getDay();
 
@@ -30,8 +33,6 @@ function getWeekOfMonth(date) {
 export class App extends Component {
 	state = {
 		categories: [],
-		tasks: [],
-		events: [],
 		error: [],
 		weekday: null,
 		day: null,
@@ -76,19 +77,19 @@ export class App extends Component {
 			{
 				id: 1,
 				title: "Weekdays",
-				subText: "(Sunday through Saturday)",
+				subText: "Here are the tasks that you will perform each day of the week",
 				dateType: `(${weekday})`,
 			},
 			{
 				id: 2,
 				title: "Weekly",
-				subText: "(Weeks 1-5)",
+				subText: "Here are the tasks that you will perform each week of the month",
 				dateType: ` (Week ${weekOfMonth} of the Month)`,
 			},
 			{
 				id: 3,
 				title: "Monthly",
-				subText: "(January through December)",
+				subText: "Here are the tasks that will you perform each month of the year",
 				dateType: `(${month})`,
 			},
 		];
@@ -106,65 +107,16 @@ export class App extends Component {
 		});
 	}
 
-	handleDeleteTask = (taskId) => {
-		this.setState({
-			tasks: this.state.tasks.filter((task) => task.id !== parseInt(taskId)),
-		});
-	};
-
-	handleGrabEvents = (events) => {
-		this.setState({ events });
-	};
-
-	handleGrabTasks = (taskList) => {
-		this.setState({ tasks: taskList });
-
-		if (this.state.tasks.length !== 0) {
-			let newTaskList = [];
-			this.state.tasks.map((task) => {
-				task.date_of_task = new Date(task.date_of_task);
-
-				// grab event object from state by given ID in task object
-				let taskEventSharedMatch = this.state.events.find(
-					(event) => parseInt(event.id) === parseInt(task.event_id)
-				);
-				// grab category number from reccurence property
-				let taskEventCategory = parseInt(taskEventSharedMatch.recurrence);
-				// translate category number to corresponding text
-				if (taskEventCategory === 1) {
-					taskEventCategory = "Weekdays";
-				} else if (taskEventCategory === 2) {
-					taskEventCategory = "Weekly";
-				} else {
-					taskEventCategory = "Monthly";
-				}
-				// create new object with category value
-				let taskCategory = {
-					taskCat: taskEventCategory,
-					taskTitle: taskEventSharedMatch.title,
-					task_recurrence_specifics: taskEventSharedMatch.recurrence_specifics,
-				};
-
-				// push object with new value into existing task
-				let newTask = Object.assign(task, taskCategory);
-				// push updated task into a new task list
-				newTaskList.push(newTask);
-			});
-			// push updated task list into state
-			this.setState({
-				tasks: newTaskList,
-			});
-		}
-	};
-
 	// routing
 	renderMainRoutes() {
 		return (
 			<Switch>
-				<Route path="/login" component={LandingPage} />
-				<Route path="/Home" component={Dashboard} />
-				<Route path="/Category/:category" component={CategoryListMain} />
-				<Route path="/AddTask" component={AddTask} />
+				<PrivateRoute exact path="/" component={LandingPage} />
+				<PublicOnlyRoute path="/login" component={LandingPage} />
+				<PrivateRoute path="/Home" component={Dashboard} />
+				<PrivateRoute path="/Category/:category" component={CategoryListMain} />
+				<PrivateRoute path="/Event/:event_id" component={EventPage} />
+				<PrivateRoute path="/AddTask" component={AddTask} />
 			</Switch>
 		);
 	}
@@ -196,11 +148,7 @@ export class App extends Component {
 			year: this.state.year,
 			startDate: this.state.startDate,
 			endChecked: this.state.endChecked,
-			deleteTask: this.handleDeleteTask,
-			grabTasks: this.handleGrabTasks,
-			grabEvents: this.handleGrabEvents,
 			handleDateSelection: this.handleDateSelection,
-			validateEndDateNever: this.validateEndDateNever,
 			weekdayList: weekdayList,
 			weeklyList: weeklyList,
 			monthlyList: monthlyList,

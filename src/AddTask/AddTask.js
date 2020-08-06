@@ -340,7 +340,13 @@ export class AddTask extends Component {
 					</div>
 					<div>
 						<label htmlFor="addTaskNotes">Notes</label>
-						<textarea name="addTaskNotes" id="addTaskNotes" rows="5" cols="33" />
+						<textarea
+							name="addTaskNotes"
+							id="addTaskNotes"
+							placeholder="Add any relevant and detailed instructions here."
+							rows="5"
+							cols="33"
+						/>
 					</div>
 					<div>
 						<label htmlFor="datePicker">Pick End Date</label>

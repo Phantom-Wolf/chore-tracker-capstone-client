@@ -2,9 +2,14 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import "./CategoryListNav.css";
 import ChoreContext from "../ChoreContext";
+import TokenService from "../services/token-service";
 
 export class CategoryListNav extends Component {
 	static contextType = ChoreContext;
+
+	logout = () => {
+		TokenService.clearAuthToken();
+	};
 
 	render() {
 		const { categories = [] } = this.context;
@@ -27,6 +32,11 @@ export class CategoryListNav extends Component {
 					<li>
 						<NavLink to={`/AddTask`} className="catNav navAddTask">
 							<h3>Add Task</h3>
+						</NavLink>
+					</li>
+					<li className="logout" onClick={this.logout}>
+						<NavLink to={`/login`} className="catNav navAddTask logout">
+							<h3>Sign Out</h3>
 						</NavLink>
 					</li>
 				</ul>

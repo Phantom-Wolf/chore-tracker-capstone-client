@@ -1,16 +1,43 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import "./CategoryListMain.css";
 import CategoryListNav from "../CategoryListNav/CategoryListNav";
+import config from "../config";
+import TokenService from "../services/token-service";
 import ChoreContext from "../ChoreContext";
 
-
 export class CategoryListMain extends Component {
+	state = {
+		events: [],
+	};
+
 	static defaultProps = {
 		match: {
 			params: {},
 		},
 	};
 
+	componentDidMount() {
+		fetch(`${config.API_ENDPOINT}/api/events`, {
+			method: "GET",
+			headers: { authorization: `bearer ${TokenService.getAuthToken()}` },
+		})
+			.then((eventRes) => {
+				if (!eventRes.ok) {
+					throw new Error("Something went wrong, please try again later.");
+				}
+				return eventRes.json();
+			})
+			.then((res) => {
+				console.log("Events List", res);
+				this.setState({
+					events: res,
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}
 
 	static contextType = ChoreContext;
 
@@ -29,14 +56,23 @@ export class CategoryListMain extends Component {
 					<nav>
 						<CategoryListNav />
 					</nav>
+					<p className="listMainSubtext">
+						Here are the tasks that you will perform on each day of the week
+					</p>
 					<ul className="CategoryPageDateTypes">
 						{this.context.weekdayList.map((weekday) => (
 							<li key={weekday.id}>
 								<h3>{weekday.name}</h3>
 								<ul>
-									{this.context.events.map((event) => {
+									{this.state.events.map((event) => {
 										if (event.recurrence_specifics.includes(weekday.name)) {
-											return <li key={event.id}>{event.title}</li>;
+											return (
+												<li key={event.id} className="eventPageListItem">
+													<NavLink to={`/Event/${event.id}`} className="event">
+														<h3>{event.title}</h3>
+													</NavLink>
+												</li>
+											);
 										}
 									})}
 								</ul>
@@ -57,15 +93,24 @@ export class CategoryListMain extends Component {
 					<nav>
 						<CategoryListNav />
 					</nav>
+					<p className="listMainSubtext">
+						Here are the tasks that you will perform in each week of the month
+					</p>
 					<ul className="CategoryPageDateTypes">
 						{this.context.weeklyList.map((week) => (
 							<li key={week.id}>
 								<h3>{week.name}</h3>
 								<ul>
-									{this.context.events.map((event) => {
+									{this.state.events.map((event) => {
 										if (event.recurrence_specifics.includes(week.name)) {
 											console.log(event.title);
-											return <li key={event.id}>{event.title}</li>;
+											return (
+												<li key={event.id} className="eventPageListItem">
+													<NavLink to={`/Event/${event.id}`} className="event">
+														<h3>{event.title}</h3>
+													</NavLink>
+												</li>
+											);
 										} else {
 											console.log("false match");
 										}
@@ -88,15 +133,24 @@ export class CategoryListMain extends Component {
 					<nav>
 						<CategoryListNav />
 					</nav>
+					<p className="listMainSubtext">
+						Here are the tasks that will you perform in each month of the year
+					</p>
 					<ul className="CategoryPageDateTypes">
 						{this.context.monthlyList.map((month) => (
 							<li key={month.id}>
 								<h3>{month.name}</h3>
 								<ul>
-									{this.context.events.map((event) => {
+									{this.state.events.map((event) => {
 										if (event.recurrence_specifics.includes(month.name)) {
 											console.log(event.title);
-											return <li key={event.id}>{event.title}</li>;
+											return (
+												<li key={event.id} className="eventPageListItem">
+													<NavLink to={`/Event/${event.id}`} className="event">
+														<h3>{event.title}</h3>
+													</NavLink>
+												</li>
+											);
 										} else {
 											console.log("false match");
 										}
@@ -112,7 +166,8 @@ export class CategoryListMain extends Component {
 	}
 
 	render() {
-
+		console.log(this.context.tasks);
+		console.log(this.context.events);
 		return <>{this.renderCategories(this.props.match.params.category)}</>;
 	}
 }

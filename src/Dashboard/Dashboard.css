@@ -16,3 +16,23 @@
 	font-size: 13px;
 	font-weight: normal;
 }
+
+.dashTask {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.task {
+	text-decoration: none;
+	color: rgb(20, 20, 20);
+	display: inline-block;
+	width: 20%;
+}
+
+.task:hover {
+	cursor: pointer;
+	transition: ease-in, 0.3s;
+	color: rgb(88, 88, 88);
+}

@@ -1,0 +1,39 @@
+.EventPageEdit label {
+	display: block;
+	width: 280px;
+	margin: 5px auto;
+	font-weight: bold;
+}
+
+.eventSection {
+	margin: 5px auto;
+	text-align: left;
+	width: 280px;
+}
+
+.eventSection h3 {
+	text-align: center;
+}
+
+.eventSection textarea {
+	border-radius: 5px;
+	border-width: 2px;
+	border-color: grey;
+}
+
+.eventSection span {
+	font-weight: bold;
+}
+
+.eventsection .buttons {
+	display: flex;
+	/* justify-content: center; */
+	/* align-self: center; */
+	margin: 0px auto;
+	align-items: center;
+}
+
+.eventsection button {
+	/* display: block; */
+	margin: 0px auto;
+}

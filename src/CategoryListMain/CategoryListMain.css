@@ -1,5 +1,4 @@
-.dashboard,
-.dashboardDate {
+.dashboard, .dashboardDate {
 	margin: 5px auto;
 	text-align: center;
 }
@@ -19,4 +18,26 @@
 
 .cat_page_date {
 	text-align: right;
+	margin-right: 10px;
+}
+
+.eventPageListItem {
+	list-style: none;
+}
+
+.event {
+	text-decoration: none;
+	color: rgb(20, 20, 20);
+	/* display: inline-block; */
+	width: 20%;
+}
+
+.event:hover {
+	cursor: pointer;
+	transition: ease-in, 0.3s;
+	color: rgb(88, 88, 88);
+}
+
+.listMainSubtext {
+	text-align: center;
 }

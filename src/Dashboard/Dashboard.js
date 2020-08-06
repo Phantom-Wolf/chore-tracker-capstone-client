@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import "./Dashboard.css";
 import config from "../config";
 import TokenService from "../services/token-service";
@@ -7,6 +8,7 @@ import CategoryListNav from "../CategoryListNav/CategoryListNav";
 
 export class CategoryListMain extends Component {
 	state = {
+		events: [],
 		tasks: [],
 	};
 
@@ -17,17 +19,19 @@ export class CategoryListMain extends Component {
 			method: "GET",
 			headers: { authorization: `bearer ${TokenService.getAuthToken()}` },
 		})
-			.then((res) => {
-				if (!res.ok) {
+			.then((eventRes) => {
+				if (!eventRes.ok) {
 					throw new Error("Something went wrong, please try again later.");
 				}
-				return res.json();
+				return eventRes.json();
 			})
 			.then((res) => {
 				console.log("Events List", res);
-				this.context.grabEvents(res);
+				this.setState({
+					events: res,
+				});
 
-				this.context.events.map((event) => {
+				this.state.events.map((event) => {
 					let event_id = event.id;
 
 					fetch(`${config.API_ENDPOINT}/api/tasks/tasker/${event_id}`, {
@@ -49,7 +53,7 @@ export class CategoryListMain extends Component {
 							this.setState({
 								tasks: existingTasks.concat(data),
 							});
-							this.context.grabTasks(this.state.tasks);
+							this.updateTaskList();
 						})
 						.catch((err) => {
 							this.setState({
@@ -63,23 +67,119 @@ export class CategoryListMain extends Component {
 			});
 	}
 
-	render() {
-		const { categories = [], tasks = [] } = this.context;
-		const options1 = {
-			weekday: "long",
-			year: "numeric",
-			month: "long",
-			day: "numeric",
-			week: "numeric",
+	updateTaskList() {
+		if (this.state.tasks.length !== 0) {
+			let newTaskList = [];
+			this.state.tasks.map((task) => {
+				task.date_of_task = new Date(new Date(task.date_of_task).toDateString());
+
+				// grab event object from state by given ID in task object
+				let taskEventSharedMatch = this.state.events.find(
+					(event) => parseInt(event.id) === parseInt(task.event_id)
+				);
+				// grab category number from reccurence property
+				let taskEventCategory = parseInt(taskEventSharedMatch.recurrence);
+				// translate category number to corresponding text
+				if (taskEventCategory === 1) {
+					taskEventCategory = "Weekdays";
+				} else if (taskEventCategory === 2) {
+					taskEventCategory = "Weekly";
+				} else {
+					taskEventCategory = "Monthly";
+				}
+				// create new object with category value
+				let taskCategory = {
+					taskCat: taskEventCategory,
+					taskTitle: taskEventSharedMatch.title,
+					task_recurrence_specifics: taskEventSharedMatch.recurrence_specifics,
+				};
+
+				// push object with new value into existing task
+				let newTask = Object.assign(task, taskCategory);
+				// push updated task into a new task list
+				newTaskList.push(newTask);
+			});
+			// push updated task list into state
+			this.setState({
+				tasks: newTaskList,
+			});
+		}
+	}
+
+	updateCheckStatus = (e) => {
+		// e.preventDefault();
+		console.log(e);
+		let taskObject = this.state.tasks.find((task) => parseInt(task.id) === parseInt(e));
+		console.log(taskObject);
+		let stateData = {
+			event_id: taskObject.event_id,
+			date_of_task: taskObject.date_of_task,
+			task_status: !taskObject.task_status,
+			task_completion_date: taskObject.task_completion_date,
 		};
-		let date1 = new Date();
-		const dateTimeFormat3 = new Intl.DateTimeFormat("en-US", options1);
+		console.log("stateDate", stateData);
+		fetch(`${config.API_ENDPOINT}/api/tasks/${parseInt(e)}`, {
+			method: "PATCH",
+			body: JSON.stringify(stateData),
+			headers: {
+				"content-type": "application/json",
+				authorization: `bearer ${TokenService.getAuthToken()}`,
+			},
+		})
+			.then((TaskRes) => {
+				if (!TaskRes.ok) {
+					console.log(TaskRes.error.message);
+					throw new Error("Something went wrong, please try again later.");
+				}
+				// console.log(TaskRes.json());
+				window.location = "/home";
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	statusCheck = (task) => {
+		let htmlOutput = "";
+		if (task.task_status) {
+			htmlOutput = (
+				<input
+					type="checkbox"
+					className="complete_task"
+					name="taskCompletion"
+					id={task.id}
+					defaultChecked
+					value={task.id}
+					onClick={(e) => this.updateCheckStatus(e.target.value)}
+				/>
+			);
+		} else {
+			htmlOutput = (
+				// <button type="button" value={task.id} onClick={(e) => this.doalert(e.target.value)}>
+				// 	Complete
+				// </button>
+				<input
+					type="checkbox"
+					className="complete_task"
+					name="taskCompletion"
+					id={task.id}
+					value={task.id}
+					onClick={(e) => this.updateCheckStatus(e.target.value)}
+				/>
+			);
+		}
+		return htmlOutput;
+	};
+
+	render() {
+		const { categories = [] } = this.context;
+		const tasks = this.state.tasks;
 
 		return (
 			<section className="CategoryListMain">
 				<header>
 					<h2 className="dashboard">Dashboard</h2>
-					<p className="dashboardDate">{dateTimeFormat3.format(date1)}</p>
+					<p className="dashboardDate">{this.context.currentDate}</p>
 				</header>
 				<nav>
 					<CategoryListNav />
@@ -100,21 +200,66 @@ export class CategoryListMain extends Component {
 											parseInt(task.date_of_task.getDate()) === parseInt(this.context.day) &&
 											task.date_of_task.getMonth() + 1 === this.context.monthNumber
 										) {
-											return <li key={task.id}>{task.taskTitle} </li>;
+											return (
+												<li key={task.id} className="dashTask">
+													<NavLink to={`/Event/${task.event_id}`} className="task">
+														<h3>{task.taskTitle}</h3>
+													</NavLink>
+													<form className="taskItemForm">
+														<label>
+															Completed?
+															<input
+																type="checkbox"
+																className="complete_task"
+																name="taskCompletion"
+																id={task.id}
+
+																// id="end_date_never_checkbox"
+															/>
+														</label>
+													</form>
+												</li>
+											);
 										} else if (
 											category.title === "Monthly" &&
 											task.taskCat === category.title &&
 											task.date_of_task.getMonth() + 1 === this.context.monthNumber &&
 											task.date_of_task.getFullYear() === this.context.year
 										) {
-											return <li key={task.id}>{task.taskTitle} </li>;
+											return (
+												<li key={task.id} className="dashTask">
+													<NavLink to={`/Event/${task.event_id}`} className="task">
+														<h3>{task.taskTitle}</h3>
+													</NavLink>
+													<form id={task.id} className="taskItemForm">
+														<span>Complete? {this.statusCheck(task)}</span>
+													</form>
+												</li>
+											);
 										} else if (
 											category.title === "Weekly" &&
 											task.taskCat === category.title &&
 											task.date_of_task >= new Date(this.context.firstOfWeekDate) &&
 											task.date_of_task <= new Date(this.context.lastOfWeekDate)
 										) {
-											return <li key={task.id}>{task.taskTitle} </li>;
+											return (
+												<li key={task.id} className="dashTask">
+													<NavLink to={`/Event/${task.event_id}`} className="task">
+														<h3>{task.taskTitle}</h3>
+													</NavLink>
+													<form className="taskItemForm">
+														<label>
+															Completed?
+															<input
+																type="checkbox"
+																className="complete_task"
+																name="taskCompletion"
+																id={task.id}
+															/>
+														</label>
+													</form>
+												</li>
+											);
 										}
 									})}
 								</ul>
@@ -128,3 +273,4 @@ export class CategoryListMain extends Component {
 }
 
 export default CategoryListMain;
+// <p className="dashboardDate">{dateTimeFormat3.format(date1)}</p>
