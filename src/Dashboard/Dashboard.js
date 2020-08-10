@@ -107,7 +107,6 @@ export class CategoryListMain extends Component {
 	}
 
 	updateCheckStatus = (e) => {
-		// e.preventDefault();
 		console.log(e);
 		let taskObject = this.state.tasks.find((task) => parseInt(task.id) === parseInt(e));
 		console.log(taskObject);
@@ -131,7 +130,7 @@ export class CategoryListMain extends Component {
 					console.log(TaskRes.error.message);
 					throw new Error("Something went wrong, please try again later.");
 				}
-				// console.log(TaskRes.json());
+
 				window.location = "/home";
 			})
 			.catch((err) => {
@@ -155,9 +154,6 @@ export class CategoryListMain extends Component {
 			);
 		} else {
 			htmlOutput = (
-				// <button type="button" value={task.id} onClick={(e) => this.doalert(e.target.value)}>
-				// 	Complete
-				// </button>
 				<input
 					type="checkbox"
 					className="complete_task"
@@ -177,22 +173,21 @@ export class CategoryListMain extends Component {
 
 		return (
 			<section className="CategoryListMain">
+				<p className="cat_page_date">{this.context.currentDate}</p>
 				<header>
 					<h2 className="dashboard">Dashboard</h2>
-					<p className="dashboardDate">{this.context.currentDate}</p>
 				</header>
 				<nav>
 					<CategoryListNav />
 				</nav>
-
+				<p className="dashSubtext">Here are the current tasks that need to be completed</p>
 				<ul className="CategoryListMain_List">
 					{categories.map((category) => (
 						<li key={category.id}>
 							<section className="CategorySection">
-								<h3>
-									{category.title} <span className="subText">{category.dateType}</span>
-								</h3>
-								<ul>
+								<h3 className="listTitleName">{category.title}</h3>
+								<p className="subText">{category.dateType}</p>
+								<ul className="dashTaskul">
 									{tasks.map((task) => {
 										if (
 											category.title === "Weekdays" &&
@@ -205,18 +200,8 @@ export class CategoryListMain extends Component {
 													<NavLink to={`/Event/${task.event_id}`} className="task">
 														<h3>{task.taskTitle}</h3>
 													</NavLink>
-													<form className="taskItemForm">
-														<label>
-															Completed?
-															<input
-																type="checkbox"
-																className="complete_task"
-																name="taskCompletion"
-																id={task.id}
-
-																// id="end_date_never_checkbox"
-															/>
-														</label>
+													<form id={task.id} className="taskItemForm">
+														<span>Completed? {this.statusCheck(task)}</span>
 													</form>
 												</li>
 											);
@@ -232,7 +217,7 @@ export class CategoryListMain extends Component {
 														<h3>{task.taskTitle}</h3>
 													</NavLink>
 													<form id={task.id} className="taskItemForm">
-														<span>Complete? {this.statusCheck(task)}</span>
+														<span>Completed? {this.statusCheck(task)}</span>
 													</form>
 												</li>
 											);
@@ -247,16 +232,8 @@ export class CategoryListMain extends Component {
 													<NavLink to={`/Event/${task.event_id}`} className="task">
 														<h3>{task.taskTitle}</h3>
 													</NavLink>
-													<form className="taskItemForm">
-														<label>
-															Completed?
-															<input
-																type="checkbox"
-																className="complete_task"
-																name="taskCompletion"
-																id={task.id}
-															/>
-														</label>
+													<form id={task.id} className="taskItemForm">
+														<span>Completed? {this.statusCheck(task)}</span>
 													</form>
 												</li>
 											);

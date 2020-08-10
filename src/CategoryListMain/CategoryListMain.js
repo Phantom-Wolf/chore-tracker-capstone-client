@@ -51,7 +51,6 @@ export class CategoryListMain extends Component {
 
 					<header className="CategoryPageHeader">
 						<h2>Weekdays</h2>
-						<p>It is currently {this.context.weekday}</p>
 					</header>
 					<nav>
 						<CategoryListNav />
@@ -59,10 +58,11 @@ export class CategoryListMain extends Component {
 					<p className="listMainSubtext">
 						Here are the tasks that you will perform on each day of the week
 					</p>
+
 					<ul className="CategoryPageDateTypes">
 						{this.context.weekdayList.map((weekday) => (
 							<li key={weekday.id}>
-								<h3>{weekday.name}</h3>
+								<h3 className="listTitleName">{weekday.name}</h3>
 								<ul>
 									{this.state.events.map((event) => {
 										if (event.recurrence_specifics.includes(weekday.name)) {
@@ -88,7 +88,6 @@ export class CategoryListMain extends Component {
 
 					<header className="CategoryPageHeader">
 						<h2>Weeks</h2>
-						<p>It is currently Week {this.context.weekOfMonth} of the Month</p>
 					</header>
 					<nav>
 						<CategoryListNav />
@@ -96,10 +95,13 @@ export class CategoryListMain extends Component {
 					<p className="listMainSubtext">
 						Here are the tasks that you will perform in each week of the month
 					</p>
+					<p className="listMainSubDate">
+						It is currently Week {this.context.weekOfMonth} of {this.context.month}
+					</p>
 					<ul className="CategoryPageDateTypes">
 						{this.context.weeklyList.map((week) => (
 							<li key={week.id}>
-								<h3>{week.name}</h3>
+								<h3 className="listTitleName">{week.name}</h3>
 								<ul>
 									{this.state.events.map((event) => {
 										if (event.recurrence_specifics.includes(week.name)) {
@@ -128,7 +130,6 @@ export class CategoryListMain extends Component {
 
 					<header className="CategoryPageHeader">
 						<h2>Months</h2>
-						<p>It is currently {this.context.month}</p>
 					</header>
 					<nav>
 						<CategoryListNav />
@@ -136,10 +137,11 @@ export class CategoryListMain extends Component {
 					<p className="listMainSubtext">
 						Here are the tasks that will you perform in each month of the year
 					</p>
+
 					<ul className="CategoryPageDateTypes">
 						{this.context.monthlyList.map((month) => (
 							<li key={month.id}>
-								<h3>{month.name}</h3>
+								<h3 className="listTitleName">{month.name}</h3>
 								<ul>
 									{this.state.events.map((event) => {
 										if (event.recurrence_specifics.includes(month.name)) {

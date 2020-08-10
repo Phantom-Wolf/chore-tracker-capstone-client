@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import ChoreContext from "../ChoreContext";
 import CircleButton from "../CircleButton/CircleButton";
 import TokenService from "../services/token-service";
+import CategoryListNav from "../CategoryListNav/CategoryListNav";
 import config from "../config";
 import { Link } from "react-router-dom";
 
@@ -230,12 +231,12 @@ export class AddTask extends Component {
 		return <div className="add_task_cat_section">{htmlOutput}</div>;
 	}
 
-	formatQueryParams(params) {
-		const queryItems = Object.keys(params).map(
-			(key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
-		);
-		return queryItems.join("&");
-	}
+	// formatQueryParams(params) {
+	// 	const queryItems = Object.keys(params).map(
+	// 		(key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+	// 	);
+	// 	return queryItems.join("&");
+	// }
 
 	handleTaskSubmit = (e) => {
 		e.preventDefault();
@@ -320,12 +321,13 @@ export class AddTask extends Component {
 
 		return (
 			<section className="addTask">
-				<CircleButton tag={Link} to="/home" type="button" className="AddTask__home-button">
-					Home
-				</CircleButton>
+				<p className="cat_page_date">{this.context.currentDate}</p>
 				<header className="AddTaskHeader">
 					<h2>Add a Task</h2>
 				</header>
+				<nav>
+					<CategoryListNav />
+				</nav>
 				<form className="addTaskForm" onSubmit={this.handleTaskSubmit}>
 					<div>
 						<label htmlFor="taskName">Task Name</label>

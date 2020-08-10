@@ -1,10 +1,23 @@
-.dashboard, .dashboardDate {
+.dashboard,
+.dashboardDate {
 	margin: 5px auto;
 	text-align: center;
 }
 
-.CategoryListMain_List {
-	list-style: none;
+.CategoryPageHeader {
+	margin: 5px auto;
+	text-align: center;
+}
+
+.CategoryPage ul {
+	list-style-type: none;
+	margin: 0px;
+}
+
+.CategoryPageDateTypes {
+	list-style-type: none;
+	margin: 0px;
+	width: 100%;
 }
 
 .CategorySection {
@@ -17,12 +30,14 @@
 }
 
 .cat_page_date {
-	text-align: right;
-	margin-right: 10px;
+	text-align: center;
 }
 
 .eventPageListItem {
 	list-style: none;
+	display: block;
+	margin: auto;
+	text-align: center;
 }
 
 .event {
@@ -40,4 +55,19 @@
 
 .listMainSubtext {
 	text-align: center;
+}
+.listMainSubDate {
+	text-align: center;
+}
+
+@media only screen and (min-width: 1100px) {
+	.cat_page_date {
+		text-align: right;
+		margin-right: 10px;
+	}
+
+	.CategoryPageHeader {
+		margin: 5px auto;
+		text-align: center;
+	}
 }

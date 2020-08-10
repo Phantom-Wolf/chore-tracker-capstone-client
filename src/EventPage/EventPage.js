@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./EventPage.css";
 import CategoryListNav from "../CategoryListNav/CategoryListNav";
-import ValidateForm from "../ValidateForm/ValidateForm";
+// import ValidateForm from "../ValidateForm/ValidateForm";
 import TokenService from "../services/token-service";
 import config from "../config";
 import ChoreContext from "../ChoreContext";

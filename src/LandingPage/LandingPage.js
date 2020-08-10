@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import TokenService from "../services/token-service";
+import "./LandingPage.css";
 
 export class LandingPage extends Component {
 	componentDidMount() {
@@ -16,10 +17,12 @@ export class LandingPage extends Component {
 				<div className="topBarLogin">
 					<Login />
 				</div>
-				<section>
-					<div></div>
+				<section className="LandingPage">
+					<div className="heroImage">
+						<h1>TaskService</h1>
+					</div>
 
-					<Register />
+					<Register className="register" />
 				</section>
 			</div>
 		);

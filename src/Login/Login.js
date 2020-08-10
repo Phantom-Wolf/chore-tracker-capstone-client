@@ -58,12 +58,12 @@ export class Login extends Component {
 		}
 	}
 
-	formatQueryParams(params) {
-		const queryItems = Object.keys(params).map(
-			(key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
-		);
-		return queryItems.join("&");
-	}
+	// formatQueryParams(params) {
+	// 	const queryItems = Object.keys(params).map(
+	// 		(key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+	// 	);
+	// 	return queryItems.join("&");
+	// }
 
 	handleLogin = (e) => {
 		e.preventDefault();
@@ -97,7 +97,7 @@ export class Login extends Component {
 			user_email: data.loginEmail,
 			user_password: data.loginPassword,
 		};
-
+		this.setState({ error: null });
 		fetch(`${config.API_ENDPOINT}/api/auth/login`, {
 			method: "POST",
 			body: JSON.stringify(stateData),
@@ -108,9 +108,10 @@ export class Login extends Component {
 			// if the api returns data ...
 			.then((res) => {
 				if (!res.ok) {
-					throw new Error("Something went wrong, please try again later.");
+					// throw new Error(res.data);
+					throw res;
 				}
-				console.log("res", res);
+
 				return res.json();
 			})
 			// use the json api output
@@ -126,10 +127,24 @@ export class Login extends Component {
 
 				window.location = "/home";
 			})
-			.catch((err) => {
-				this.setState({
-					error: err.message,
-				});
+			.catch((error) => {
+				console.log("Error occurred");
+				try {
+					error.json().then((body) => {
+						//Here is already the payload from API
+						console.log(body);
+						console.log("message = " + body.error);
+						this.setState({
+							error: body.error,
+						});
+					});
+				} catch (e) {
+					console.log("Error parsing promise");
+					console.log(error);
+					this.setState({
+						error: error,
+					});
+				}
 			});
 	};
 
@@ -137,7 +152,12 @@ export class Login extends Component {
 		return (
 			<section className="loginForm">
 				<form onSubmit={this.handleLogin}>
-					<div>
+					{this.state.error && (
+						<div className="error">
+							<p>{this.state.error}</p>
+						</div>
+					)}
+					<div className="logEmail">
 						<label htmlFor="logEmail">
 							Email:
 							<input
@@ -148,7 +168,7 @@ export class Login extends Component {
 							/>
 						</label>
 					</div>
-					<div>
+					<div className="logPass">
 						<label htmlFor="logPassword">
 							Password:
 							<input

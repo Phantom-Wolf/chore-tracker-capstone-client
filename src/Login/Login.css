@@ -1,29 +1,68 @@
 .loginForm form {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
 	align-items: center;
-
-	height: 40px;
 	background-color: grey;
 	color: whitesmoke;
+	display: flex;
+	flex-direction: column;
+
 }
 
-/* .loginForm label {
-	display: inline-block;
-	width: 140px;
-	margin: 2px 5px;
-	text-align: right;
-} */
+.logEmail,
+.logPass {
+	flex-direction: row;
+}
 
 .loginForm input {
-	/* display: inline-block; */
+	display: inline-block;
 	width: 180px;
 	border-radius: 2px;
-	margin: 0px 5px;
+	align-self: center;
+}
+
+.loginForm label {
+	display: inline-block;
+	width: 140px;
+	text-align: left;
 }
 
 .loginForm button {
 	color: whitesmoke;
+	margin: 15px;
+	background-color: rgb(88, 88, 88);
+	padding: 3px 15px;
+	border-style: none;
+	border-radius: 5px;
+	font-weight: 500;
+	text-align: center;
+}
+
+.loginForm button:hover {
+	cursor: pointer;
+	transition: ease-in, 0.5s;
+	color: rgb(88, 88, 88);
+	background-color: whitesmoke;
+}
+
+.loginForm .error {
 	margin-right: 10px;
+	color: rgb(150, 1, 1);
+}
+
+@media only screen and (min-width: 1100px) {
+	.loginForm form {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: center;
+		height: 40px;
+	}
+
+	.loginForm input {
+		margin-left: 5px;
+		width: 180px;
+	}
+
+	.loginForm label {
+		width: 280px;
+	}
 }
