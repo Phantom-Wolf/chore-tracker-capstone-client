@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import ValidateForm from "../ValidateForm/ValidateForm";
 import DatePicker from "react-datepicker";
 import ChoreContext from "../ChoreContext";
-import CircleButton from "../CircleButton/CircleButton";
 import TokenService from "../services/token-service";
 import CategoryListNav from "../CategoryListNav/CategoryListNav";
 import config from "../config";
-import { Link } from "react-router-dom";
+
 
 export class AddTask extends Component {
 	constructor(props) {
