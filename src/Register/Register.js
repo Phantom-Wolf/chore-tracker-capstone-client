@@ -20,6 +20,7 @@ export class Register extends Component {
 				touched: false,
 			},
 			error: null,
+			success: null,
 			params: {
 				user_email: "",
 				user_password: "",
@@ -132,6 +133,12 @@ export class Register extends Component {
 				if (data.totalItems === 0) {
 					throw new Error("No data found");
 				}
+
+				this.setState({
+					success: "Registration successful! You may now sign in!",
+				});
+
+				document.getElementById("registerForm").reset();
 			})
 			.catch((err) => {
 				this.setState({
@@ -143,7 +150,7 @@ export class Register extends Component {
 	render() {
 		return (
 			<section className="signUpForm">
-				<form onSubmit={this.handleRegister}>
+				<form id="registerForm" onSubmit={this.handleRegister}>
 					<div>
 						<h2 className="signUpHeader">Sign Up</h2>
 						<label htmlFor="registerEmail">Email:</label>
@@ -170,6 +177,7 @@ export class Register extends Component {
 						<input
 							type="text"
 							id="confirmPass"
+							name="confirm_password"
 							onChange={(e) => this.updateConfirmPassword(e.target.value)}
 						/>
 						{this.state.confirmPassword.touched && (
@@ -190,6 +198,11 @@ export class Register extends Component {
 				{this.state.error && (
 					<div>
 						<p className="error-message">{this.state.error}</p>
+					</div>
+				)}
+				{this.state.success && (
+					<div>
+						<p className="success-message">{this.state.success}</p>
 					</div>
 				)}
 			</section>

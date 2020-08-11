@@ -10,6 +10,7 @@ export class CategoryListMain extends Component {
 	state = {
 		events: [],
 		tasks: [],
+		noEvents: false,
 	};
 
 	static contextType = ChoreContext;
@@ -30,6 +31,12 @@ export class CategoryListMain extends Component {
 				this.setState({
 					events: res,
 				});
+
+				if (this.state.events.length === 0) {
+					this.setState({
+						noEvents: true,
+					});
+				}
 
 				this.state.events.map((event) => {
 					let event_id = event.id;
@@ -167,6 +174,13 @@ export class CategoryListMain extends Component {
 		return htmlOutput;
 	};
 
+	noTasks() {
+		console.log("events length", this.state.events.length);
+		if (this.state.noEvents === true) {
+			return "It appears that you have no Tasks yet! Navigate to the Add Task form to get started!";
+		}
+	}
+
 	render() {
 		const { categories = [] } = this.context;
 		const tasks = this.state.tasks;
@@ -181,6 +195,7 @@ export class CategoryListMain extends Component {
 					<CategoryListNav />
 				</nav>
 				<p className="dashSubtext">Here are the current tasks that need to be completed</p>
+				<p className="dashSubtext">{this.noTasks()}</p>
 				<ul className="CategoryListMain_List">
 					{categories.map((category) => (
 						<li key={category.id}>
