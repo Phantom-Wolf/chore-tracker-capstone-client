@@ -185,7 +185,7 @@ export class CategoryListMain extends Component {
 					{categories.map((category) => (
 						<li key={category.id}>
 							<section className="CategorySection">
-								<h3 className="listTitleName">{category.title}</h3>
+								<h3 className="listTitleNameDash">{category.title}</h3>
 								<p className="subText">{category.dateType}</p>
 								<ul className="dashTaskul">
 									{tasks.map((task) => {
