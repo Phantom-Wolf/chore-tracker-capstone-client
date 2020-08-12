@@ -6,7 +6,6 @@ import TokenService from "../services/token-service";
 import CategoryListNav from "../CategoryListNav/CategoryListNav";
 import config from "../config";
 
-
 export class AddTask extends Component {
 	constructor(props) {
 		super(props);
@@ -371,6 +370,10 @@ export class AddTask extends Component {
 						{this.state.endDate.touched && <ValidateForm message={this.validateEndDate()} />}
 					</div>
 					<div>
+						<p className="catDescription">
+							You can choose how often you want your tasks to repeat; whether by weekdays, weeks of
+							the month, or by the month.
+						</p>
 						<label htmlFor="categorySelect">Select Routine</label>
 						<select
 							id="categorySelect"
