@@ -135,7 +135,7 @@ export class Register extends Component {
 				}
 
 				this.setState({
-					success: "Registration successful! You may now sign in!",
+					success: "Registration successful! You may now sign in.",
 				});
 
 				document.getElementById("registerForm").reset();

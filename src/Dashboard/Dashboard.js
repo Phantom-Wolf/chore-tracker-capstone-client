@@ -177,7 +177,7 @@ export class CategoryListMain extends Component {
 	noTasks() {
 		console.log("events length", this.state.events.length);
 		if (this.state.noEvents === true) {
-			return "It appears that you have no Tasks yet! Navigate to the Add Task form to get started!";
+			return "It appears that you have no Tasks yet. Navigate to the Add Task form to get started!";
 		}
 	}
 
@@ -194,7 +194,7 @@ export class CategoryListMain extends Component {
 				<nav>
 					<CategoryListNav />
 				</nav>
-				<p className="dashSubtext">Here are the current tasks that need to be completed</p>
+				<p className="dashSubtext">Here are the current tasks that need to be completed.</p>
 				<p className="dashSubtext">{this.noTasks()}</p>
 				<ul className="CategoryListMain_List">
 					{categories.map((category) => (

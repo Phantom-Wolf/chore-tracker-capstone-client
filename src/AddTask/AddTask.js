@@ -313,6 +313,31 @@ export class AddTask extends Component {
 			});
 	};
 
+	disableKeyboard = () => {
+		if (window.innerWidth < 1100) {
+			return (
+				<DatePicker
+					disabledKeyboardNavigation
+					id="datePicker"
+					name="addTaskEndDate"
+					selected={this.state.endDate.value}
+					onChange={this.updateEndDate}
+					disabled={this.state.endChecked}
+				/>
+			);
+		} else {
+			return (
+				<DatePicker
+					id="datePicker"
+					name="addTaskEndDate"
+					selected={this.state.endDate.value}
+					onChange={this.updateEndDate}
+					disabled={this.state.endChecked}
+				/>
+			);
+		}
+	};
+
 	render() {
 		// import selected context values
 		const { categories = [], weekdayList = [], weeklyList = [], monthlyList = [] } = this.context;
@@ -350,13 +375,7 @@ export class AddTask extends Component {
 					</div>
 					<div>
 						<label htmlFor="datePicker">Pick End Date</label>
-						<DatePicker
-							id="datePicker"
-							name="addTaskEndDate"
-							selected={this.state.endDate.value}
-							onChange={this.updateEndDate}
-							disabled={this.state.endChecked}
-						/>
+						{this.disableKeyboard()}
 						<label>
 							<input
 								type="checkbox"
