@@ -157,6 +157,7 @@ export class Login extends Component {
 							<p>{this.state.error}</p>
 						</div>
 					)}
+					<p className = "existingUser">Existing User?</p>
 					<div className="logEmail">
 						<label htmlFor="logEmail">
 							Email:

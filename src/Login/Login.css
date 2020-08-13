@@ -4,11 +4,13 @@
 	color: whitesmoke;
 	display: flex;
 	flex-direction: column;
-
 }
 
-.logEmail,
-.logPass {
+.existingUser {
+	margin: 15px 0px;
+}
+
+.logEmail, .logPass {
 	flex-direction: row;
 }
 
@@ -56,12 +58,13 @@
 		align-items: center;
 		height: 40px;
 	}
-
+	.existingUser {
+		margin: 0px 15px 0px 0px;
+	}
 	.loginForm input {
 		margin-left: 5px;
 		width: 180px;
 	}
-
 	.loginForm label {
 		width: 280px;
 	}
