@@ -175,7 +175,6 @@ export class CategoryListMain extends Component {
 	};
 
 	noTasks() {
-		console.log("events length", this.state.events.length);
 		if (this.state.noEvents === true) {
 			return "It appears that you have no Tasks yet. Navigate to the Add Task form to get started!";
 		}
@@ -200,16 +199,21 @@ export class CategoryListMain extends Component {
 					{categories.map((category) => (
 						<li key={category.id}>
 							<section className="CategorySection">
-								<h3 className="listTitleNameDash">{category.title}</h3>
-								<p className="subText">{category.dateType}</p>
+								<div className="catSectionHeader">
+									<h3 className="listTitleNameDash">{category.title}</h3>
+									<p className="listSubTextDash">{category.dateType}</p>
+								</div>
 								<ul className="dashTaskul">
 									{tasks.map((task) => {
 										if (
 											category.title === "Weekdays" &&
 											task.taskCat === category.title &&
-											parseInt(task.date_of_task.getDate()) === parseInt(this.context.day) &&
-											task.date_of_task.getMonth() + 1 === this.context.monthNumber
+											parseInt(task.date_of_task.getDate()) ===
+												parseInt(new Date(this.context.currentDate).getDate()) &&
+											task.date_of_task.getMonth() + 1 === this.context.monthNumber &&
+											task.date_of_task.getFullYear() === this.context.year
 										) {
+											
 											return (
 												<li key={task.id} className="dashTask">
 													<NavLink to={`/Event/${task.event_id}`} className="task">

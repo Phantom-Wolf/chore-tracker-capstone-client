@@ -19,7 +19,10 @@ export class LandingPage extends Component {
 				</div>
 				<section className="LandingPage">
 					<div className="heroImage">
-						<h1>recTask</h1>
+						<h1>onTrack</h1>
+						<p>STAY ON TASK</p>
+						<p>EVERY WEEKDAY. EVERY WEEK. EVERY MONTH.</p>
+						<p>ALWAYS.</p>
 					</div>
 
 					<Register className="register" />

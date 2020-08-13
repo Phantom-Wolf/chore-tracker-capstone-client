@@ -48,7 +48,7 @@ export class App extends Component {
 		// additions of the date to the state
 
 		let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][
-			new Date().getDay()
+			new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" })).getDay()
 		];
 		let dateDay = new Date().getDate();
 		let weekOfMonth = getWeekOfMonth(new Date());
@@ -130,8 +130,9 @@ export class App extends Component {
 			day: "numeric",
 			week: "numeric",
 		};
-		let date1 = new Date();
-		const dateTimeFormat3 = new Intl.DateTimeFormat("en-US", options1);
+		let date1 = new Date().toLocaleString("en-US", { timeZone: "America/Chicago" });
+		let date2 = new Date(date1);
+		const dateTimeFormat3 = new Intl.DateTimeFormat({ timeZone: "America/Chicago" }, options1);
 
 		// values for context provider
 		const value = {
@@ -152,7 +153,7 @@ export class App extends Component {
 			weekdayList: weekdayList,
 			weeklyList: weeklyList,
 			monthlyList: monthlyList,
-			currentDate: dateTimeFormat3.format(date1),
+			currentDate: dateTimeFormat3.format(date2),
 		};
 
 		return (

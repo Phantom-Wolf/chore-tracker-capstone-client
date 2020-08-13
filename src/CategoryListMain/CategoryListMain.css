@@ -1,5 +1,4 @@
-.dashboard,
-.dashboardDate {
+.dashboard, .dashboardDate {
 	margin: 5px auto;
 	text-align: center;
 }
@@ -56,8 +55,17 @@
 .listMainSubtext {
 	text-align: center;
 }
+
 .listMainSubDate {
 	text-align: center;
+}
+
+.listTitleName {
+	border-bottom: 5px solid grey;
+}
+
+.CategoryPageEventUl {
+	min-height: 200px;
 }
 
 @media only screen and (min-width: 1100px) {
@@ -65,7 +73,6 @@
 		text-align: right;
 		margin-right: 10px;
 	}
-
 	.CategoryPageHeader {
 		margin: 5px auto;
 		text-align: center;

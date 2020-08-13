@@ -63,7 +63,7 @@ export class CategoryListMain extends Component {
 						{this.context.weekdayList.map((weekday) => (
 							<li key={weekday.id}>
 								<h3 className="listTitleName">{weekday.name}</h3>
-								<ul>
+								<ul className = "CategoryPageEventUl">
 									{this.state.events.map((event) => {
 										if (event.recurrence_specifics.includes(weekday.name)) {
 											return (
@@ -102,7 +102,7 @@ export class CategoryListMain extends Component {
 						{this.context.weeklyList.map((week) => (
 							<li key={week.id}>
 								<h3 className="listTitleName">{week.name}</h3>
-								<ul>
+								<ul className = "CategoryPageEventUl">
 									{this.state.events.map((event) => {
 										if (event.recurrence_specifics.includes(week.name)) {
 											console.log(event.title);
@@ -142,7 +142,7 @@ export class CategoryListMain extends Component {
 						{this.context.monthlyList.map((month) => (
 							<li key={month.id}>
 								<h3 className="listTitleName">{month.name}</h3>
-								<ul>
+								<ul className = "CategoryPageEventUl">
 									{this.state.events.map((event) => {
 										if (event.recurrence_specifics.includes(month.name)) {
 											console.log(event.title);
