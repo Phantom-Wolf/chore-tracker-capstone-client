@@ -24,6 +24,12 @@ export class Login extends Component {
 		};
 	}
 
+	componentDidMount() {
+		if (TokenService.hasAuthToken()) {
+			TokenService.clearAuthToken();
+		}
+	}
+
 	static contextType = ChoreContext;
 
 	// input credentials into state
@@ -57,13 +63,6 @@ export class Login extends Component {
 			return "Password must be atleast 8 characters long and it must include atleast one number, one lowercase and one uppercase letter.";
 		}
 	}
-
-	// formatQueryParams(params) {
-	// 	const queryItems = Object.keys(params).map(
-	// 		(key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
-	// 	);
-	// 	return queryItems.join("&");
-	// }
 
 	handleLogin = (e) => {
 		e.preventDefault();
@@ -148,6 +147,10 @@ export class Login extends Component {
 			});
 	};
 
+	returnHome() {
+		window.location = "/Landing";
+	}
+
 	render() {
 		return (
 			<section className="loginForm">
@@ -157,33 +160,32 @@ export class Login extends Component {
 							<p>{this.state.error}</p>
 						</div>
 					)}
-					<p className = "existingUser">Existing User?</p>
+					<p className="existingUser">Sign in to onTrack</p>
 					<div className="logEmail">
-						<label htmlFor="logEmail">
-							Email:
-							<input
-								type="email"
-								name="loginEmail"
-								id="logEmail"
-								onChange={(e) => this.updateEmail(e.target.value)}
-							/>
-						</label>
+						<label htmlFor="logEmail">Email:</label>
+						<input
+							type="email"
+							name="loginEmail"
+							id="logEmail"
+							onChange={(e) => this.updateEmail(e.target.value)}
+						/>
 					</div>
 					<div className="logPass">
-						<label htmlFor="logPassword">
-							Password:
-							<input
-								type="password"
-								name="loginPassword"
-								id="logPassword"
-								onChange={(e) => this.updatePassword(e.target.value)}
-							/>
-						</label>
+						<label htmlFor="logPassword">Password:</label>
+						<input
+							type="password"
+							name="loginPassword"
+							id="logPassword"
+							onChange={(e) => this.updatePassword(e.target.value)}
+						/>
 					</div>
 					<div>
 						<button type="submit" disabled={this.validateEmail() || this.validatePassword()}>
 							Login
 						</button>
+					</div>
+					<div>
+						<p>New to onTrack? <span className="clickSignUp" onClick={this.returnHome}>Sign up Here.</span></p>
 					</div>
 				</form>
 			</section>

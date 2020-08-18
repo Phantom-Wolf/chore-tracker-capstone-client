@@ -147,12 +147,24 @@ export class Register extends Component {
 			});
 	};
 
+	goToLogin() {
+		window.location = "/Login";
+	}
+
 	render() {
 		return (
 			<section className="signUpForm">
 				<form id="registerForm" onSubmit={this.handleRegister}>
 					<div>
 						<h2 className="signUpHeader">Sign Up</h2>
+						<div>
+							<p>
+								Existing User?{" "}
+								<span className="clickSignIn" onClick={this.goToLogin}>
+									Sign in Here.
+								</span>
+							</p>
+						</div>
 						<label htmlFor="registerEmail">Email:</label>
 						<input
 							type="email"

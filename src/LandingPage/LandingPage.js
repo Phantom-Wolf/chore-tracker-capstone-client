@@ -14,9 +14,6 @@ export class LandingPage extends Component {
 	render() {
 		return (
 			<div>
-				<div className="topBarLogin">
-					<Login />
-				</div>
 				<section className="LandingPage">
 					<div className="heroImage">
 						<h1>onTrack</h1>

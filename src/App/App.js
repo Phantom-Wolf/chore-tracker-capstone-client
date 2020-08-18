@@ -4,6 +4,7 @@ import { Switch } from "react-router-dom";
 import CategoryListMain from "../CategoryListMain/CategoryListMain";
 import ChoreContext from "../ChoreContext";
 import LandingPage from "../LandingPage/LandingPage";
+import Login from "../Login/Login";
 import Dashboard from "../Dashboard/Dashboard";
 import AddTask from "../AddTask/AddTask";
 import EventPage from "../EventPage/EventPage";
@@ -112,7 +113,8 @@ export class App extends Component {
 		return (
 			<Switch>
 				<PrivateRoute exact path="/" component={LandingPage} />
-				<PublicOnlyRoute path="/login" component={LandingPage} />
+				<PublicOnlyRoute path="/Landing" component={LandingPage} />
+				<PublicOnlyRoute path="/Login" component={Login} />
 				<PrivateRoute path="/Home" component={Dashboard} />
 				<PrivateRoute path="/Category/:category" component={CategoryListMain} />
 				<PrivateRoute path="/Event/:event_id" component={EventPage} />
