@@ -155,11 +155,6 @@ export class Login extends Component {
 		return (
 			<section className="loginForm">
 				<form onSubmit={this.handleLogin}>
-					{this.state.error && (
-						<div className="error">
-							<p>{this.state.error}</p>
-						</div>
-					)}
 					<p className="existingUser">Sign in to onTrack</p>
 					<div className="logEmail">
 						<label htmlFor="logEmail">Email:</label>
@@ -184,8 +179,18 @@ export class Login extends Component {
 							Login
 						</button>
 					</div>
+					{this.state.error && (
+						<div className="error">
+							<p>{this.state.error}</p>
+						</div>
+					)}
 					<div>
-						<p>New to onTrack? <span className="clickSignUp" onClick={this.returnHome}>Sign up Here.</span></p>
+						<p>
+							New to onTrack?{" "}
+							<span className="clickSignUp" onClick={this.returnHome}>
+								Sign up Here.
+							</span>
+						</p>
 					</div>
 				</form>
 			</section>
