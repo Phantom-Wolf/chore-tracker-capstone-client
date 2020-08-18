@@ -1,17 +1,19 @@
+
+
 .loginForm form {
 	display: flex;
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background-color: rgb(161, 161, 161);
-	color: whitesmoke;
+	background-color: whitesmoke;
+	color: rgb(116, 116, 116);
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: 300px;
 	height: 400px;
-	border: 2px solid rgb(116, 116, 116);
+	border: 1px solid rgb(212, 212, 212);
 	border-radius: 5px;
 	font-size: 18px;
 }
@@ -25,15 +27,13 @@
 
 .logEmail, .logPass {
 	display: block;
-	/* margin: 0px 50%; */
 	text-align: center;
 }
 
 
 .loginForm input {
-	/* margin-left: 5px; */
 	width: 250px;
-	border: 2px solid rgb(116, 116, 116);
+	border: 1px solid rgb(212, 212, 212);
 	border-radius: 5px;
 	line-height: 22px;
 }

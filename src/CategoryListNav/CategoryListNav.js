@@ -20,14 +20,6 @@ export class CategoryListNav extends Component {
 		};
 	}
 
-	// componentDidUpdate() {
-	// 	if (window.innerWidth > 1100) {
-	// 		this.setState({
-	// 			isToggle: true,
-	// 		});
-	// 	}
-	// }
-
 	static contextType = ChoreContext;
 
 	logout = () => {
@@ -83,7 +75,7 @@ export class CategoryListNav extends Component {
 						</li>
 						<li className="logout" onClick={this.logout}>
 							<NavLink
-								to={`/login`}
+								to={`/Landing`}
 								className="catNav navAddTask logout "
 								style={{
 									display: this.state.isToggle || window.innerWidth > 1100 ? "block" : "none",
