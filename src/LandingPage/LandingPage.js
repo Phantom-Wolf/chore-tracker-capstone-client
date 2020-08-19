@@ -18,7 +18,7 @@ export class LandingPage extends Component {
 					<div className="heroImage">
 						<h1>onTrack</h1>
 						<p>STAY ON TASK</p>
-						<p>EVERY WEEKDAY. EVERY WEEK. EVERY MONTH.</p>
+						<p>EVERY DAY. EVERY WEEK. EVERY MONTH.</p>
 						<p>ALWAYS.</p>
 					</div>
 

@@ -1,5 +1,3 @@
-
-
 .loginForm form {
 	display: flex;
 	position: fixed;
@@ -30,13 +28,13 @@
 	text-align: center;
 }
 
-
 .loginForm input {
 	width: 250px;
 	border: 1px solid rgb(212, 212, 212);
 	border-radius: 5px;
 	line-height: 22px;
 }
+
 .loginForm label {
 	display: block;
 	width: 280px;
@@ -47,14 +45,21 @@
 
 .loginForm button {
 	color: whitesmoke;
-	margin: 15px;
-	background-color: rgb(88, 88, 88);
-	padding: 3px 15px;
+	width: 253px;
+	margin-top: 25px;
+	background-color: rgb(47, 184, 20);
+	padding: 3px 0px;
 	border-style: none;
 	border-radius: 5px;
 	font-size: 18px;
 	font-weight: 500;
 	text-align: center;
+}
+
+.loginForm button:hover {
+	cursor: pointer;
+	background-color: rgb(41, 158, 18);
+	;
 }
 
 .clickSignUp {
@@ -66,15 +71,7 @@
 	cursor: pointer;
 }
 
-.loginForm button:hover {
-	
-	transition: ease-in, 0.5s;
-	color: rgb(88, 88, 88);
-	background-color: whitesmoke;
-}
-
 .loginForm .error {
 	margin-right: 10px;
 	color: rgb(150, 1, 1);
 }
-

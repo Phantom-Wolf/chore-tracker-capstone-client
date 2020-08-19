@@ -48,8 +48,7 @@
 
 .event:hover {
 	cursor: pointer;
-	transition: ease-in, 0.3s;
-	color: rgb(88, 88, 88);
+	color: rgb(105, 105, 105);
 }
 
 .listMainSubtext {
