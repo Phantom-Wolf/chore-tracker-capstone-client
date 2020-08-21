@@ -172,28 +172,32 @@ export class Register extends Component {
 							id="signupEmail"
 							onChange={(e) => this.updateEmail(e.target.value)}
 						/>
-						{this.state.email.touched && <ValidateForm message={this.validateEmail()} />}
+						{this.state.email.touched && (
+							<ValidateForm className="validateMessage" message={this.validateEmail()} />
+						)}
 					</div>
 					<div>
 						<label htmlFor="signupPassword">Password:</label>
 						<input
-							type="text"
+							type="password"
 							name="user_password"
 							id="signupPassword"
 							onChange={(e) => this.updatePassword(e.target.value)}
 						/>
-						{this.state.password.touched && <ValidateForm message={this.validatePassword()} />}
+						{this.state.password.touched && (
+							<ValidateForm className="validateMessage" message={this.validatePassword()} />
+						)}
 					</div>
 					<div>
 						<label htmlFor="confirmPass">Confirm Password:</label>
 						<input
-							type="text"
+							type="password"
 							id="confirmPass"
 							name="confirm_password"
 							onChange={(e) => this.updateConfirmPassword(e.target.value)}
 						/>
 						{this.state.confirmPassword.touched && (
-							<ValidateForm message={this.validateConfirmPassword()} />
+							<ValidateForm className="validateMessage" message={this.validateConfirmPassword()} />
 						)}
 					</div>
 					<div>

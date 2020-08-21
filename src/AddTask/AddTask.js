@@ -5,6 +5,7 @@ import ChoreContext from "../ChoreContext";
 import TokenService from "../services/token-service";
 import CategoryListNav from "../CategoryListNav/CategoryListNav";
 import config from "../config";
+import "./AddTask.css"
 
 export class AddTask extends Component {
 	constructor(props) {
