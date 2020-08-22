@@ -8,6 +8,7 @@ import Login from "../Login/Login";
 import Dashboard from "../Dashboard/Dashboard";
 import AddTask from "../AddTask/AddTask";
 import EventPage from "../EventPage/EventPage";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import "react-datepicker/dist/react-datepicker.css";
 import { weekdayList, weeklyList, monthlyList } from "../STORE";
 import PrivateRoute from "../Utils/PrivateRoute";
@@ -119,6 +120,7 @@ export class App extends Component {
 				<PrivateRoute path="/Category/:category" component={CategoryListMain} />
 				<PrivateRoute path="/Event/:event_id" component={EventPage} />
 				<PrivateRoute path="/AddTask" component={AddTask} />
+				<PrivateRoute component={NotFoundPage} />
 			</Switch>
 		);
 	}
