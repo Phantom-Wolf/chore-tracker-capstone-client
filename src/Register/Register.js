@@ -106,8 +106,8 @@ export class Register extends Component {
 		console.log(this.state.params);
 
 		const newUser = {
-			user_email: this.state.params.user_email,
-			user_password: this.state.params.user_password,
+			user_email: this.state.email.value,
+			user_password: this.state.password.value,
 		};
 		console.log(newUser);
 		this.setState({ error: null });
