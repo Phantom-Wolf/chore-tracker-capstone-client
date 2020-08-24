@@ -1,6 +1,10 @@
 .signUpForm {
 	width: 300px;
 	margin: 0px auto;
+	background-color: #0000006c;
+	padding: 0px 25px 40px 25px;
+	border-radius: 5px;
+	color: whitesmoke;
 }
 
 /* header */
@@ -65,14 +69,14 @@
 /* validation messaging */
 
 .error-message {
-	color: rgb(150, 1, 1);
+	color: rgb(255, 0, 0);
 	width: 100%;
 }
 
 .error {
 	width: 100%;
 	font-size: 15px;
-	color: rgb(150, 1, 1);
+	color: rgb(255, 0, 0);
 }
 
 .success-message {
@@ -80,6 +84,12 @@
 }
 
 @media only screen and (min-width: 1100px) {
+	.signUpForm{
+		padding: 0px 25px 0px 25px;
+		margin: 0px;
+		height: 60vh;
+		border-radius: 0px 0px 5px 5px;
+	}
 	.signUpForm form {
 		margin-right: 10px;
 	}
