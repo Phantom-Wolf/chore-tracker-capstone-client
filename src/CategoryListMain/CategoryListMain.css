@@ -1,11 +1,29 @@
-.dashboard, .dashboardDate {
+.CategoryPage {
+	color: whitesmoke;
+	background-color: rgb(255, 255, 239);
+	color: rgb(238, 207, 30);
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	background: linear-gradient(rgba(221, 208, 22, 0.233), rgba(173, 163, 17, 0.349)),
+		url(../fields-of-wheat.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: 30% 50%;
+}
+
+.dashboard,
+.dashboardDate {
 	margin: 5px auto;
 	text-align: center;
 }
 
-.CategoryPageHeader {
-	margin: 5px auto;
+.CategoryPageHeader h2 {
+	margin: 0px auto 0px;
 	text-align: center;
+	background-color: rgb(20, 20, 20);
+	padding: 5px 0px 0px 5px;
 }
 
 .CategoryPage ul {
@@ -17,6 +35,7 @@
 	list-style-type: none;
 	margin: 0px;
 	width: 100%;
+	color: rgb(238, 207, 30);
 }
 
 .CategorySection {
@@ -30,6 +49,23 @@
 
 .cat_page_date {
 	text-align: center;
+	margin: 0px;
+	padding: 10px 0px 10px;
+	color: rgb(238, 207, 30);
+	background-color: rgb(20, 20, 20);
+}
+
+.catBody {
+	width: 90%;
+	margin: 20px auto 0px;
+	background-color: rgba(20, 20, 20, 0.85);
+	border-radius: 5px 5px 0px 0px;
+}
+
+.listMainSubtext {
+	margin-top: 0px;
+	text-align: center;
+	padding: 10px 0px 0px;
 }
 
 .eventPageListItem {
@@ -41,18 +77,14 @@
 
 .event {
 	text-decoration: none;
-	color: rgb(20, 20, 20);
+	color: rgb(238, 207, 30);
 	/* display: inline-block; */
 	width: 20%;
 }
 
 .event:hover {
 	cursor: pointer;
-	color: rgb(105, 105, 105);
-}
-
-.listMainSubtext {
-	text-align: center;
+	color: rgb(194, 169, 26);
 }
 
 .listMainSubDate {
@@ -60,20 +92,25 @@
 }
 
 .listTitleName {
-	border-bottom: 5px solid grey;
+	border-bottom: 5px solid rgba(14, 14, 14, 0.85);
 }
 
 .CategoryPageEventUl {
 	min-height: 200px;
+	color: whitesmoke;
 }
 
 @media only screen and (min-width: 1100px) {
 	.cat_page_date {
 		text-align: right;
-		margin-right: 10px;
+		padding-right: 10px;
 	}
 	.CategoryPageHeader {
-		margin: 5px auto;
+		/* margin: 0px auto; */
 		text-align: center;
+	}
+
+	.catBody {
+		width: 70%;
 	}
 }

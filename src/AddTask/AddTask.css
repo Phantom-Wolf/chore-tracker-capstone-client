@@ -1,11 +1,40 @@
-.addTaskForm {
-	margin: 5px auto;
-	text-align: left;
-	width: 280px;
-	font-size: 18px;
+.addTask {
+	height: 100%;
+	background-color: rgb(20, 20, 20);
+	display: flex;
+	flex-direction: column;
+	background: linear-gradient(rgba(221, 208, 22, 0.205), rgba(173, 163, 17, 0.349)),
+		url(../farmer-background.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: 30% 50%;
 }
 
-#taskName, #addTaskNotes, #categorySelect {
+.addTaskForm {
+	margin: 20px auto 20px;
+	text-align: left;
+	width: 340px;
+	font-size: 18px;
+	background-color: rgba(20, 20, 20, 0.85);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 30px;
+	border-radius: 5px;
+	color: rgb(238, 207, 30);
+}
+
+.AddTaskHeader {
+	color: rgb(238, 207, 30);
+	background-color: rgb(20, 20, 20);
+	padding: 5px 0px 0px 5px;
+}
+
+#taskName,
+#addTaskNotes,
+#categorySelect {
 	width: 280px;
 }
 
@@ -22,15 +51,19 @@
 
 .addTaskForm select {
 	padding: 3px 0px;
+	padding-left: 20px;
 }
 
 .catDescription {
 	/* font-size: 13px; */
 	font-weight: normal;
 	text-align: center;
+	width: 90%;
 }
 
-.add_task_cat_list1, .add_task_cat_list2, .add_task_cat_list3 {
+.add_task_cat_list1,
+.add_task_cat_list2,
+.add_task_cat_list3 {
 	display: flex;
 	flex-direction: column;
 	list-style: none;
@@ -56,14 +89,21 @@
 	background-color: rgb(41, 158, 18);
 }
 
-.addTask input, select, textarea {
+.addTask input,
+select,
+textarea {
 	border-radius: 5px;
-	border: 1px solid rgb(173, 173, 173);
+	border: 1px solid rgb(0, 0, 0);
 	line-height: 22px;
+	background-color: rgb(20, 20, 20);
+	color:rgb(238, 207, 30);
 }
 
 .addTask #datePicker {
 	cursor: pointer;
 	width: 92px;
 	text-align: center;
+}
+
+@media only screen and (min-width: 1100px) {
 }

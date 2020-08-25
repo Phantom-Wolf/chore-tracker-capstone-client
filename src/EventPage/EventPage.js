@@ -177,7 +177,7 @@ export class EventPage extends Component {
 
 	render() {
 		return (
-			<>
+			<div className="EventDetails">
 				<p className="cat_page_date">{this.context.currentDate}</p>
 
 				<header className="EventPageHeader">
@@ -209,15 +209,15 @@ export class EventPage extends Component {
 						{this.state.event.notes}
 					</p>
 					<form className="EventPageEdit" onSubmit={this.handlePatch}>
-						<div className="buttons">
+						
 							<button type="button" onClick={this.handleDelete}>
 								Delete
 							</button>
-						</div>
+						
 					</form>
 					<div></div>
 				</section>
-			</>
+			</div>
 		);
 	}
 }

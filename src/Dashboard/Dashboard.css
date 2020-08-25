@@ -1,17 +1,44 @@
-.dashboard, .dashboardDate {
-	margin: 5px auto;
+.CategoryListMain {
+	margin: 0px;
+	color: rgb(238, 207, 30);
+	height: 100%;
+	background-color: rgb(20, 20, 20);
+	display: flex;
+	flex-direction: column;
+	background: linear-gradient(rgba(221, 208, 22, 0.233), rgba(173, 163, 17, 0.349)),
+		url(../fields-of-wheat.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: 35% 50%;
+
+	
+}
+
+
+.dashboard{
+	margin: 0px auto;
 	text-align: center;
+	color: rgb(238, 207, 30);
+	background-color: rgb(20, 20, 20);
+	padding: 5px 0px 0px 5px;
 }
 
 .dashSubtext {
 	text-align: center;
+	margin: 0px;
+	padding: 15px 0px 5px;
+}
+
+.dashBody{
+/* background-color: rgba(20, 20, 20, 0.459) */
 }
 
 .catSectionHeader {
 	padding: 10px 0px;
 	margin: 40px 0px;
 	/* background-color: lightgrey; */
-	border-bottom: 5px solid grey;
+	border-bottom: 5px solid rgba(14, 14, 14, 0.85);
 }
 
 .listTitleNameDash {
@@ -27,15 +54,20 @@
 }
 
 .CategorySection {
-	display: inline;
+	/* display: inline; */
+	margin: auto;
 }
 
 .CategoryListMain_List {
 	list-style: none;
+	width: 90vw;
+	margin: 20px auto 0px;
+	background-color: rgba(20, 20, 20, 0.85);
+	border-radius: 5px 5px 0px 0px;
 }
 
 .dashTaskul {
-	width: 90vw;
+	/* width: 90vw; */
 	margin: auto;
 	min-height: 200px;
 }
@@ -54,17 +86,23 @@
 
 .task {
 	text-decoration: none;
-	color: rgb(20, 20, 20);
+	color: rgb(238, 207, 30);
 	display: inline-block;
 	width: 150px;
 }
 
 .task:hover {
 	cursor: pointer;
-	color: rgb(105, 105, 105);
+	color: rgb(189, 165, 28);
 }
 
 @media only screen and (min-width: 1100px) {
+	.CategoryListMain{
+		background-position: 100% 50%;
+	}
+	.CategoryListMain_List {
+		width: 70vw;
+	}
 	.dashTask {
 		list-style: none;
 		display: flex;

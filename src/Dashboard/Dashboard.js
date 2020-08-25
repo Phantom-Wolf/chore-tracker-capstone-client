@@ -193,9 +193,10 @@ export class CategoryListMain extends Component {
 				<nav>
 					<CategoryListNav />
 				</nav>
-				<p className="dashSubtext">Here are the current tasks that need to be completed.</p>
+				<div className ="dashBody">
+				
+				<ul className="CategoryListMain_List"><p className="dashSubtext">Here are the current tasks that need to be completed.</p>
 				<p className="dashSubtext">{this.noTasks()}</p>
-				<ul className="CategoryListMain_List">
 					{categories.map((category) => (
 						<li key={category.id}>
 							<section className="CategorySection">
@@ -263,10 +264,11 @@ export class CategoryListMain extends Component {
 						</li>
 					))}
 				</ul>
+				</div>
 			</section>
 		);
 	}
 }
 
 export default CategoryListMain;
-// <p className="dashboardDate">{dateTimeFormat3.format(date1)}</p>
+
