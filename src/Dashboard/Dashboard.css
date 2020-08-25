@@ -1,6 +1,7 @@
 .CategoryListMain {
 	margin: 0px;
 	color: rgb(238, 207, 30);
+	min-height: 100vh;
 	height: 100%;
 	background-color: rgb(20, 20, 20);
 	display: flex;
@@ -11,12 +12,9 @@
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: 35% 50%;
-
-	
 }
 
-
-.dashboard{
+.dashboard {
 	margin: 0px auto;
 	text-align: center;
 	color: rgb(238, 207, 30);
@@ -30,8 +28,8 @@
 	padding: 15px 0px 5px;
 }
 
-.dashBody{
-/* background-color: rgba(20, 20, 20, 0.459) */
+.dashBody {
+	/* background-color: rgba(20, 20, 20, 0.459) */
 }
 
 .catSectionHeader {
@@ -77,7 +75,6 @@
 	display: block;
 	margin: 0px auto 10px;
 	text-align: center;
-
 }
 
 .dashTask h3 {
@@ -97,7 +94,7 @@
 }
 
 @media only screen and (min-width: 1100px) {
-	.CategoryListMain{
+	.CategoryListMain {
 		background-position: 100% 50%;
 	}
 	.CategoryListMain_List {
