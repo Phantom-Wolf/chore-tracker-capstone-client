@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Raleway:wght@100&display=swap");
+
 .CategoryListMain {
 	margin: 0px;
 	color: rgb(238, 207, 30);
@@ -20,6 +22,7 @@
 	color: rgb(238, 207, 30);
 	background-color: rgb(20, 20, 20);
 	padding: 5px 0px 0px 5px;
+	font-family: Raleway;
 }
 
 .dashSubtext {
@@ -28,9 +31,6 @@
 	padding: 15px 0px 5px;
 }
 
-.dashBody {
-	/* background-color: rgba(20, 20, 20, 0.459) */
-}
 
 .catSectionHeader {
 	padding: 10px 0px;

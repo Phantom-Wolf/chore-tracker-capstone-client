@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Raleway:wght@100&display=swap");
+
 .addTask {
 	min-height: 100vh;
 	height: 100%;
@@ -31,6 +33,7 @@
 	color: rgb(238, 207, 30);
 	background-color: rgb(20, 20, 20);
 	padding: 5px 0px 0px 5px;
+	font-family: Raleway;
 }
 
 #taskName,
@@ -97,7 +100,7 @@ textarea {
 	border: 1px solid rgb(0, 0, 0);
 	line-height: 22px;
 	background-color: rgb(20, 20, 20);
-	color:rgb(238, 207, 30);
+	color: rgb(238, 207, 30);
 }
 
 .addTask #datePicker {

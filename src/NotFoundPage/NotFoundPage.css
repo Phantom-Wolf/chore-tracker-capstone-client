@@ -1,3 +1,31 @@
-.NotFound h2, p {
-    text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Raleway:wght@100&display=swap");
+
+
+.NotFound {
+	background-color: rgb(20, 20, 20);
+	min-height: 100vh;
+	height: 100%;
 }
+
+.NotFound h2 {
+	text-align: center;
+	color: rgb(238, 207, 30);
+    margin: 0px;
+    font-family: Raleway;
+}
+
+.NotFound header {
+	background-color: rgb(20, 20, 20);
+}
+
+.notFoundBody {
+	text-align: center;
+	padding-top: 50px;
+}
+
+.notFoundBody img {
+	border-radius: 5px;
+	max-width: 90%;
+}
+
+

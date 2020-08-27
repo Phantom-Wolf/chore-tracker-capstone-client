@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Raleway:wght@100&display=swap");
+
 .CategoryPage {
 	color: whitesmoke;
 	background-color: rgb(255, 255, 239);
@@ -25,6 +27,7 @@
 	text-align: center;
 	background-color: rgb(20, 20, 20);
 	padding: 5px 0px 0px 5px;
+	font-family: Raleway;
 }
 
 .CategoryPage ul {
