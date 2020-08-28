@@ -54,16 +54,13 @@
 	.CategoryListNav_List {
 		flex-direction: row;
 	}
-
 	.dropList {
 		display: flex;
 		flex-direction: row;
 	}
-
 	.catNav {
 		display: inline-block;
 	}
-
 	.toggleBar {
 		display: none;
 	}

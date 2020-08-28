@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./EventPage.css";
 import CategoryListNav from "../CategoryListNav/CategoryListNav";
-// import ValidateForm from "../ValidateForm/ValidateForm";
 import TokenService from "../services/token-service";
 import config from "../config";
 import ChoreContext from "../ChoreContext";
@@ -97,59 +96,8 @@ export class EventPage extends Component {
 		});
 	};
 
-	// validation
-
-	// functionality removed until knex .update bug repaired
-
-	// validatePatchNotes() {
-	// 	if (this.state.notes === this.state.event.notes) {
-	// 		return "No change in notes detected";
-	// 	}
-	// }
-
 	// submissions
 
-	// functionality removed until knex .update bug repaired
-
-	// handlePatch = (e) => {
-	// 	e.preventDefault();
-	// 	console.log("patch");
-	// 	console.log(e.value);
-	// 	let data = {};
-	// 	const formData = new FormData(e.target);
-	// 	for (let value of formData) {
-	// 		data[value[0]] = value[1];
-	// 	}
-	// 	console.log(data.eventNotes);
-	// 	let stateData = {
-	// 		user_id: this.state.event.user_id,
-	// 		title: this.state.event.title,
-	// 		notes: data.eventNotes,
-	// 		recurrence: this.state.event.recurrence,
-	// 		date_created: this.state.event.date_created,
-	// 		date_ended: this.state.event.date_ended,
-	// 		recurrence_specifics: this.state.event.recurrence_specifics,
-	// 	};
-	// 	console.log("stateDate", stateData);
-	// 	fetch(`${config.API_ENDPOINT}/api/events/${parseInt(this.state.id)}`, {
-	// 		method: "PATCH",
-	// 		body: JSON.stringify(stateData),
-	// 		headers: {
-	// 			"content-type": "application/json",
-	// 			authorization: `bearer ${TokenService.getAuthToken()}`,
-	// 		},
-	// 	})
-	// 		.then((eventRes) => {
-	// 			if (!eventRes.ok) {
-	// 				console.log(eventRes.error.message);
-	// 				throw new Error("Something went wrong, please try again later.");
-	// 			}
-	// 			console.log(eventRes.json());
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 		});
-	// };
 
 	handleDelete = () => {
 		let submitData = parseInt(this.state.id);
@@ -224,20 +172,3 @@ export class EventPage extends Component {
 
 export default EventPage;
 
-// ********** had to remove patch functionality until programmers who maintenance knex fixes .update in the back end.
-// it replaces the array brackets in the database into object brackets in database, which invalidates the code. **********
-
-// <label htmlFor="eventNotes">Notes</label>
-// <textarea
-// 	name="eventNotes"
-// 	id="eventNotes"
-// 	value={this.state.notes}
-// 	rows="5"
-// 	cols="33"
-// 	onChange={(e) => this.updateNotes(e.target.value)}
-// />
-// {this.state.touched && <ValidateForm message={this.validatePatchNotes()} />}
-
-// <button type="submit" disabled={this.validatePatchNotes()}>
-// 		Update Notes
-// </button>

@@ -230,13 +230,6 @@ export class AddTask extends Component {
 		return <div className="add_task_cat_section">{htmlOutput}</div>;
 	}
 
-	// formatQueryParams(params) {
-	// 	const queryItems = Object.keys(params).map(
-	// 		(key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
-	// 	);
-	// 	return queryItems.join("&");
-	// }
-
 	handleTaskSubmit = (e) => {
 		e.preventDefault();
 		//create an object to store the search filters

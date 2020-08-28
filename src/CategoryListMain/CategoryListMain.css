@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Alata&family=Raleway:wght@100&display=swap");
-
 .CategoryPage {
 	color: whitesmoke;
 	background-color: rgb(255, 255, 239);
@@ -8,16 +7,14 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	background: linear-gradient(rgba(221, 208, 22, 0.233), rgba(173, 163, 17, 0.349)),
-		url(../fields-of-wheat.jpg);
+	background: linear-gradient(rgba(221, 208, 22, 0.233), rgba(173, 163, 17, 0.349)), url(../fields-of-wheat.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: 30% 50%;
 }
 
-.dashboard,
-.dashboardDate {
+.dashboard, .dashboardDate {
 	margin: 5px auto;
 	text-align: center;
 }
@@ -82,7 +79,6 @@
 .event {
 	text-decoration: none;
 	color: rgb(238, 207, 30);
-	/* display: inline-block; */
 	width: 20%;
 }
 
@@ -113,7 +109,6 @@
 		/* margin: 0px auto; */
 		text-align: center;
 	}
-
 	.catBody {
 		width: 70%;
 	}

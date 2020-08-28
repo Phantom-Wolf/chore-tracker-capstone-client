@@ -3,14 +3,12 @@
 	background-color: rgba(201, 201, 201, 0.767);
 	display: flex;
 	flex-direction: column;
-	background: linear-gradient(rgba(221, 208, 22, 0.349), rgba(173, 163, 17, 0.349)),
-		url(../sunset-wheat.jpg);
+	background: linear-gradient(rgba(221, 208, 22, 0.349), rgba(173, 163, 17, 0.349)), url(../sunset-wheat.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: 40% 50%;
 }
-
 
 .loginForm form {
 	display: flex;
@@ -25,7 +23,6 @@
 	align-items: center;
 	width: 300px;
 	height: 400px;
-	/* border: 1px solid rgb(0, 0, 0); */
 	border-radius: 5px;
 	font-size: 18px;
 }
@@ -85,9 +82,10 @@
 	cursor: pointer;
 }
 
-.loginForm .error {
-	margin-right: 10px;
-	color: rgb(150, 1, 1);
+.loginForm .error p {
+	margin-top: 10px;
+	color: rgb(253, 2, 2);
+	text-align: center;
 }
 
 @media only screen and (min-width: 1100px) {
