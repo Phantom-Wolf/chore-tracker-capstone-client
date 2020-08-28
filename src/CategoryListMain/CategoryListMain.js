@@ -88,7 +88,7 @@ export class CategoryListMain extends Component {
 					<p className="cat_page_date">{this.context.currentDate}</p>
 
 					<header className="CategoryPageHeader">
-						<h2>Weeks</h2>
+						<h2>Weekly</h2>
 					</header>
 					<nav>
 						<CategoryListNav />

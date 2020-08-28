@@ -1,10 +1,10 @@
 # Capstone Project Title
 
-One line description of what this app is doing and who is it for
+onTrack: A web application that makes tracking reoccuring tasks easy.
 
 ## Working Prototype
 
-You can access a working prototype of the React app here: https://your-app-client.herokuapp.com/ and Node app here: https://your-app-server.herokuapp.com/
+You can access a working prototype of the React app here: https://chore-tracker-capstone-client.vercel.app/Landing
 
 ## User Stories
 
@@ -64,33 +64,31 @@ This app is for two types of users: a visitor and a logged-in user
 * I want to be able to be able to click buttons that allow me to edit the contents of the task or to delete the task
 * so that the task remains relevent to my needs
 
-### Wireframes
+### ScreenShots
 
-<!-- Landing/Login Page
+Login Page
 :-------------------------:
-![Landing/Login Page](/github-images/wireframes/landing-page-wireframe.png) -->
+![Login Page](/github-images/wireframes/onTrack-Login.png)
 
 Landing/Register Page
 :-------------------------:
-![Landing/Register Page](/github-images/wireframes/landing-page-signup.png)
+![Landing/Register Page](/github-images/wireframes/onTrack-Landing.png)
 Dashboard
-![Home/Dashboard](/github-images/wireframes/home-page-dashboard.png)
+![Home/Dashboard](/github-images/wireframes/onTrack-Dashboard.png)
 Category Page/Weekdays
-![Catogory Page/Weekdays](/github-images/wireframes/category-page-weekdays.png)
+![Catogory Page/Weekdays](/github-images/wireframes/onTrack-Weekdays.png)
 Category Page/Weekly
-![Catogory Page/Weekly](/github-images/wireframes/category-page-weekly.png)
+![Catogory Page/Weekly](/github-images/wireframes/onTrack-Weeks.png)
 Category Page/Monthly
-![Catogory Page/Monthly](/github-images/wireframes/category-page-monthly.png)
+![Catogory Page/Monthly](/github-images/wireframes/onTrack-Months.png)
 Add Task Form
-![Add Task Form](/github-images/wireframes/add-task-form.png)
+![Add Task Form](/github-images/wireframes/onTrack-Add-Task.jpg)
+Task Details
+![Task Details](/github-images/wireframes/onTrack-EventPage.jpg)
+Not Found Page
+![Not Found Page](/github-images/wireframes/onTrack-NotFoundPage.png)
 
 ## Screenshots
-
-Landing/Login Page
-:-------------------------:
-![Landing Page](/github-images/screenshots/login-page-screenshot.png)
-Landing/Register Page
-![Register Page](/github-images/screenshots/login-page-screenshot.png)
 
 ## Functionality
 
@@ -110,15 +108,15 @@ The app's functionality includes:
   - **App.js** (stateful)
     - **Context.Provider** (stateless) -
       - **LandingPage.js** (stateful) - gets the _"prop name"_ and the _"callback prop name"_ from the **App.js**
-        - **Login.js** (stateful) -
         - **Register.js** (stateful) -
+      - **Login.js** (stateful) -
       - **Dashboard.js** (stateful) -
-        - **CategoryListNav.js** (stateless) 
-      - **CategoryListMain.js** (stateful) 
-        - **CategoryListNav.js** (stateless) 
-          - **AddTask.js** (stateful) -
-        - **Task.js** (stateful) -
-        
+        - **CategoryListNav.js** (stateless)
+      - **CategoryListMain.js** (stateful)
+        - **CategoryListNav.js** (stateless)
+      - **AddTask.js** (stateful) -
+      - **EventPage.js** (stateful) -
+      - **NotFoundPage.js** (stateless) -
 
 ## Back-end Structure - Business Objects
 
@@ -150,7 +148,20 @@ The app's functionality includes:
 
 API Documentation details:
 
-- get all users
+- Users
+  - post, new user data
+
+- Auth
+  - post, user credentials for login
+
+- Events
+  - get, all events by user.id
+  - post, new event and all future tasks related to event
+  - delete, event by event.id cascade all tasks related to event by id
+
+- Tasks
+  - get, all tasks by event.id
+  - patch, boolean completed status
 
 ## Responsive
 
