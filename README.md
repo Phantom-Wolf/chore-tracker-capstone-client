@@ -66,13 +66,13 @@ This app is for two types of users: a visitor and a logged-in user
 
 ### ScreenShots
 
-Login Page
-:-------------------------:
-![Login Page](/github-images/wireframes/onTrack-Login.png)
+
 
 Landing/Register Page
 :-------------------------:
 ![Landing/Register Page](/github-images/wireframes/onTrack-Landing.png)
+Login Page
+![Login Page](/github-images/wireframes/onTrack-Login.png)
 Dashboard
 ![Home/Dashboard](/github-images/wireframes/onTrack-Dashboard.png)
 Category Page/Weekdays
