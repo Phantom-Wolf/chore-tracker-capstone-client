@@ -149,19 +149,19 @@ The app's functionality includes:
 API Documentation details:
 
 - Users
-  - post, new user data
+  - post, /api/users, new user data
 
 - Auth
-  - post, user credentials for login
+  - post, /api/auth/login, user credentials for login
 
 - Events
-  - get, all events by user.id
-  - post, new event and all future tasks related to event
-  - delete, event by event.id cascade all tasks related to event by id
+  - get, /api/events, all events by user.id
+  - post, /api/events, new event and all future tasks related to event
+  - delete, /api/event/:event_id, event by event.id cascade all tasks related to event by id
 
 - Tasks
-  - get, all tasks by event.id
-  - patch, boolean completed status
+  - get, /api/tasks/tasker/:event_id, all tasks by event.id
+  - patch, /api/tasks/:task_id, update boolean completed status
 
 ## Responsive
 
