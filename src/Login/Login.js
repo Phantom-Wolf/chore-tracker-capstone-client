@@ -185,6 +185,9 @@ export class Login extends Component {
 						</div>
 					)}
 					<div>
+						<p>Demo: </p>
+						<p>E: dunder@outlook.com</p>
+						<p>P: Password1!</p>
 						<p>
 							New to onTrack?{" "}
 							<span className="clickSignUp" onClick={this.returnHome}>
