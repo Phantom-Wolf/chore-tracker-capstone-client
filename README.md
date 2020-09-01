@@ -187,13 +187,6 @@ This is v1.0 of the app, but future enhancements are expected to include:
 
 Use command line to navigate into the project folder and run the following in terminal
 
-### Local Node scripts
-
-- To install the node project ===> npm install
-- To migrate the database ===> npm run migrate -- 1
-- To run Node server (on port 8000) ===> npm run dev
-- To run tests ===> npm run test
-
 ### Local React scripts
 
 - To install the react project ===> npm install
