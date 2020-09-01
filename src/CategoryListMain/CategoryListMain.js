@@ -29,20 +29,20 @@ export class CategoryListMain extends Component {
 				return eventRes.json();
 			})
 			.then((res) => {
-				console.log("Events List", res);
+			
 				this.setState({
 					events: res,
 				});
 			})
 			.catch((err) => {
-				console.log(err);
+				
 			});
 	}
 
 	static contextType = ChoreContext;
 
 	renderCategories(category) {
-		console.log("params", category);
+		
 		let htmlOutput = "";
 		if (category === "Weekdays") {
 			htmlOutput = (
@@ -107,7 +107,7 @@ export class CategoryListMain extends Component {
 									<ul className="CategoryPageEventUl">
 										{this.state.events.map((event) => {
 											if (event.recurrence_specifics.includes(week.name)) {
-												console.log(event.title);
+												
 												return (
 													<li key={event.id} className="eventPageListItem">
 														<NavLink to={`/Event/${event.id}`} className="event">
@@ -116,7 +116,7 @@ export class CategoryListMain extends Component {
 													</li>
 												);
 											} else {
-												console.log("false match");
+											
 											}
 										})}
 									</ul>
@@ -149,7 +149,7 @@ export class CategoryListMain extends Component {
 									<ul className="CategoryPageEventUl">
 										{this.state.events.map((event) => {
 											if (event.recurrence_specifics.includes(month.name)) {
-												console.log(event.title);
+												
 												return (
 													<li key={event.id} className="eventPageListItem">
 														<NavLink to={`/Event/${event.id}`} className="event">
@@ -158,7 +158,7 @@ export class CategoryListMain extends Component {
 													</li>
 												);
 											} else {
-												console.log("false match");
+												
 											}
 										})}
 									</ul>
@@ -173,8 +173,7 @@ export class CategoryListMain extends Component {
 	}
 
 	render() {
-		console.log(this.context.tasks);
-		console.log(this.context.events);
+		
 		return <>{this.renderCategories(this.props.match.params.category)}</>;
 	}
 }

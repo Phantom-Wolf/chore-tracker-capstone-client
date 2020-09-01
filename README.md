@@ -66,8 +66,6 @@ This app is for two types of users: a visitor and a logged-in user
 
 ### ScreenShots
 
-
-
 Landing/Register Page
 :-------------------------:
 ![Landing/Register Page](/github-images/wireframes/onTrack-Landing.png)
@@ -149,12 +147,15 @@ The app's functionality includes:
 API Documentation details:
 
 - Users
+
   - post, /api/users, new user data
 
 - Auth
+
   - post, /api/auth/login, user credentials for login
 
 - Events
+
   - get, /api/events, all events by user.id
   - post, /api/events, new event and all future tasks related to event
   - delete, /api/event/:event_id, event by event.id cascade all tasks related to event by id

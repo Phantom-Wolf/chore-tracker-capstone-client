@@ -76,7 +76,7 @@ export class Login extends Component {
 		for (let value of formData) {
 			data[value[0]] = value[1];
 		}
-		console.log(data);
+		
 		let { loginEmail, loginPassword } = data;
 		if (this.validateEmail(loginEmail) === "") {
 			this.setState({
@@ -116,7 +116,7 @@ export class Login extends Component {
 			// use the json api output
 			.then((data) => {
 				//check if there is meaningfull data
-				console.log("res data", data);
+				
 				TokenService.saveAuthToken(data.authToken);
 				// check if there are no results
 
@@ -127,19 +127,14 @@ export class Login extends Component {
 				window.location = "/home";
 			})
 			.catch((error) => {
-				console.log("Error occurred");
+	
 				try {
 					error.json().then((body) => {
-						//Here is already the payload from API
-						console.log(body);
-						console.log("message = " + body.error);
 						this.setState({
 							error: body.error,
 						});
 					});
 				} catch (e) {
-					console.log("Error parsing promise");
-					console.log(error);
 					this.setState({
 						error: error,
 					});

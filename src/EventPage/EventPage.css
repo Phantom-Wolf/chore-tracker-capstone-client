@@ -73,3 +73,8 @@
 	cursor: pointer;
 	background-color: rgb(163, 23, 23);
 }
+
+.EventPageEdit button:active {
+	box-shadow: 0 2px 0 rgb(163, 23, 23);
+	transform: translateY(3px);
+}

@@ -27,7 +27,7 @@ export class CategoryListMain extends Component {
 				return eventRes.json();
 			})
 			.then((res) => {
-				console.log("Events List", res);
+				
 				this.setState({
 					events: res,
 				});
@@ -70,7 +70,7 @@ export class CategoryListMain extends Component {
 				});
 			})
 			.catch((err) => {
-				console.log(err);
+				
 			});
 	}
 
@@ -114,16 +114,15 @@ export class CategoryListMain extends Component {
 	}
 
 	updateCheckStatus = (e) => {
-		console.log(e);
+		
 		let taskObject = this.state.tasks.find((task) => parseInt(task.id) === parseInt(e));
-		console.log(taskObject);
+		
 		let stateData = {
 			event_id: taskObject.event_id,
 			date_of_task: taskObject.date_of_task,
 			task_status: !taskObject.task_status,
 			task_completion_date: taskObject.task_completion_date,
 		};
-		console.log("stateDate", stateData);
 		fetch(`${config.API_ENDPOINT}/api/tasks/${parseInt(e)}`, {
 			method: "PATCH",
 			body: JSON.stringify(stateData),
@@ -134,14 +133,13 @@ export class CategoryListMain extends Component {
 		})
 			.then((TaskRes) => {
 				if (!TaskRes.ok) {
-					console.log(TaskRes.error.message);
+					
 					throw new Error("Something went wrong, please try again later.");
 				}
 
 				window.location = "/home";
 			})
 			.catch((err) => {
-				console.log(err);
 			});
 	};
 

@@ -86,7 +86,7 @@ export class Register extends Component {
 		for (let value of formData) {
 			data[value[0]] = value[1];
 		}
-		console.log(data);
+		
 		let { user_email, user_password } = data;
 		if (this.validateEmail(user_email) === "") {
 			this.setState({
@@ -103,13 +103,13 @@ export class Register extends Component {
 		this.setState({ params: data });
 
 		//check if the state is populated with the search params data
-		console.log(this.state.params);
+		
 
 		const newUser = {
 			user_email: this.state.email.value,
 			user_password: this.state.password.value,
 		};
-		console.log(newUser);
+		
 		this.setState({ error: null });
 		fetch(`${config.API_ENDPOINT}/api/users`, {
 			method: "POST",
@@ -128,7 +128,7 @@ export class Register extends Component {
 			// use the json api output
 			.then((data) => {
 				//check if there is meaningfull data
-				console.log(data);
+			
 				// check if there are no results
 				if (data.totalItems === 0) {
 					throw new Error("No data found");

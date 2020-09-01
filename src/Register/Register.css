@@ -1,11 +1,11 @@
 .signUpForm {
 	width: 300px;
 	margin: 0px auto;
-	background-color: #0000006c;
+	background-color: rgba(20, 20, 20, 0.75);
 	padding: 0px 25px 40px 25px;
 	border-radius: 5px;
 	color: whitesmoke;
-	min-height: 400px
+	min-height: 400px;
 }
 
 /* header */
@@ -59,7 +59,7 @@
 	font-size: 18px;
 	font-weight: 500;
 	text-align: center;
-	margin: 25px auto 0px;
+	margin: 25px auto 20px;
 }
 
 .signUpForm button:hover {
@@ -67,35 +67,36 @@
 	background-color: rgb(44, 160, 21);
 }
 
+.signUpForm button:active {
+	box-shadow: 0 2px 0 rgb(44, 160, 21);
+	transform: translateY(3px);
+}
+
 /* validation messaging */
 
 .error-message {
 	color: rgb(255, 0, 0);
 	width: 100%;
+	
 }
 
 .error {
 	width: 100%;
-	font-size: 15px;
-	color: rgb(255, 0, 0);
+	font-size: 18px;
+	color: rgb(253, 0, 0);
 	text-align: center;
 }
 
 .success-message {
 	color: rgb(3, 235, 23);
 	font-weight: bold;
+	
 }
 
 @media only screen and (min-width: 1100px) {
 	.signUpForm {
 		padding: 0px 25px 0px 25px;
-		margin: 0px;
 		min-height: 420px;
-		max-height: 460px;
-		border-radius: 0px 0px 5px 5px;
-	}
-	.signUpForm form {
-		margin-right: 10px;
 	}
 	.signUpForm label {
 		text-align: left;

@@ -112,7 +112,7 @@ export class AddTask extends Component {
 		if (taskName.length === 0) {
 			return "Task Name is required";
 		} else if (taskName.length < 2) {
-			return "Task Name must be atleast 2 characters long";
+			return "Task Name must be at least 2 characters long";
 		}
 	}
 
@@ -160,7 +160,7 @@ export class AddTask extends Component {
 			this.state.categoryMonths.length === 0 &&
 			this.state.categorySelect.id !== "..."
 		) {
-			return "Please make atleast one selection";
+			return "Please make at least one selection";
 		}
 	}
 
@@ -271,7 +271,7 @@ export class AddTask extends Component {
 			date_ended: data.addTaskEndDate,
 			recurrence_specifics: specificsOutput,
 		};
-		console.log("stateDate", stateData);
+		
 
 		//assigning the object from the form data to params in the state
 
@@ -382,28 +382,28 @@ export class AddTask extends Component {
 						</label>
 						{this.state.endDate.touched && <ValidateForm message={this.validateEndDate()} />}
 					</div>
-					
-						<p className="catDescription">
-							You can choose how often you want your tasks to repeat; whether by weekdays, weeks of
-							the month, or by the month.
-						</p>
-						<label htmlFor="categorySelect">Select Routine</label>
-						<select
-							id="categorySelect"
-							name="addTaskCategorySelect"
-							onChange={(e) => this.updateCategorySelect(e.target.value)}
-						>
-							<option value={null}>...</option>
-							{categories.map((category) => (
-								<option key={category.id} value={category.id}>
-									{category.title}
-								</option>
-							))}
-						</select>
-						{this.state.categorySelect.touched && (
-							<ValidateForm message={this.validateCategorySelect()} />
-						)}
-					
+
+					<p className="catDescription">
+						You can choose how often you want your tasks to repeat; whether by weekdays, weeks of
+						the month, or by the month.
+					</p>
+					<label htmlFor="categorySelect">Select Routine</label>
+					<select
+						id="categorySelect"
+						name="addTaskCategorySelect"
+						onChange={(e) => this.updateCategorySelect(e.target.value)}
+					>
+						<option value={null}>...</option>
+						{categories.map((category) => (
+							<option key={category.id} value={category.id}>
+								{category.title}
+							</option>
+						))}
+					</select>
+					{this.state.categorySelect.touched && (
+						<ValidateForm message={this.validateCategorySelect()} />
+					)}
+
 					{this.showCategoryDateList(weekdayList, weeklyList, monthlyList)}
 					{this.state.categorySelect.touched && (
 						<ValidateForm message={this.validateDateListSelection()} />
@@ -411,6 +411,7 @@ export class AddTask extends Component {
 					<div>
 						<button
 							type="submit"
+							className="AddTaskSubmit"
 							disabled={
 								this.validateTaskName() ||
 								this.validateEndDate() ||

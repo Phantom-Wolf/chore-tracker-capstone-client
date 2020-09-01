@@ -36,7 +36,6 @@ export class EventPage extends Component {
 				return eventRes.json();
 			})
 			.then((res) => {
-				console.log("Events List", res);
 				this.setState({
 					event: res,
 					notes: res.notes,
@@ -44,7 +43,7 @@ export class EventPage extends Component {
 				});
 			})
 			.catch((err) => {
-				console.log(err);
+				this.setState({ error: err.message });
 			});
 	}
 
@@ -98,7 +97,6 @@ export class EventPage extends Component {
 
 	// submissions
 
-
 	handleDelete = () => {
 		let submitData = parseInt(this.state.id);
 
@@ -119,7 +117,6 @@ export class EventPage extends Component {
 				this.setState({
 					error: err.message,
 				});
-				console.log(this.state.error);
 			});
 	};
 
@@ -157,11 +154,9 @@ export class EventPage extends Component {
 						{this.state.event.notes}
 					</p>
 					<form className="EventPageEdit" onSubmit={this.handlePatch}>
-						
-							<button type="button" onClick={this.handleDelete}>
-								Delete
-							</button>
-						
+						<button type="button" onClick={this.handleDelete}>
+							Delete
+						</button>
 					</form>
 					<div></div>
 				</section>
@@ -171,4 +166,3 @@ export class EventPage extends Component {
 }
 
 export default EventPage;
-

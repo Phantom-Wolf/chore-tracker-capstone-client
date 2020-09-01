@@ -171,4 +171,3 @@ export class App extends Component {
 }
 
 export default App;
-// {TokenService.hasAuthToken() ? console.log("hello") : <Redirect to="/login" />}
