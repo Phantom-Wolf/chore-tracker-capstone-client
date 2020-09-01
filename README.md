@@ -2,6 +2,15 @@
 
 onTrack: A web application that makes tracking reoccuring tasks easy.
 
+## Summary
+
+onTrack is a task tracking web application. It allows users to maintain all of their repeating everyday responisibilities.
+Tasks can be separated by weekdays, weeks of the month or months. Additionally, an end date can be added and any desired notes.
+
+## Connected Server Repository 
+
+Link: https://github.com/Phantom-Wolf/chore-tracker-capstone-server
+
 ## Working Prototype
 
 You can access a working prototype of the React app here: https://chore-tracker-capstone-client.vercel.app/Landing
